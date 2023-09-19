@@ -12,7 +12,8 @@ class node {
 		}
 };
 
-void insertAtHead (int data , node * &Head)
+void insertAtHead (int data , node * &Head){
+
 	node * newNode = new node (data);
 	newNode->next = Head ;
 	Head = newNode ;
@@ -32,6 +33,14 @@ void insertAtTail (int data , node * &Head){
 	 temp->next =  newNode ;	 
  }
  
+ bool searchInLinkedList (node * Head , int key){
+ 	node * temp = Head ;
+	 	while (temp->next != key){
+	 		if (temp->data == key) return true ;
+	 		temp = temp-> next ;
+		 }
+			 return false ;
+ }
  void display (node * Head){
  	node * temp = Head ;
 		while (temp != nullptr){
@@ -50,6 +59,12 @@ int main (){
 		display (Head) ;
 	insertAtTail (5,Head) ;
 	insertAtHead (78,Head);
-	display (Head) ;
+		display (Head) ;
+	bool found = searchInLinkedList (Head , 6) ;
+	
+		if (found) cout << "Key has been found in list" ;
+		else cout << "Key not in list!" ;
+		
+		
 return 0 ;
 }
