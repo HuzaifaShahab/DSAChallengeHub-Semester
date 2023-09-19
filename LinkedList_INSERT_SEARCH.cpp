@@ -48,8 +48,20 @@ void insertAtTail (int data , node * &Head){
 	 		temp = temp->next ;
 		 }
 		    cout << "null" << endl ;
-	 }								
+	 }				
 	 
+void delition (node * head,int value){
+	node * temp = head;
+	
+	while (temp->next->data != value){
+		temp = temp -> next ;
+	}
+	
+    node * todelete = temp->next ;
+    
+    temp->next = temp->next->next ;
+	 delete todelete ;
+}
 int main (){
 	node * Head = nullptr;
 	
@@ -62,9 +74,11 @@ int main (){
 		display (Head) ;
 	bool found = searchInLinkedList (Head , 787) ;
 	
-		if (found) cout << "Key has been found in list" ;
-		else cout << "Key not in list!" ;
+		if (found) cout << "Key has been found in list" << endl ;
+		else cout << "Key not in list!" << endl;
 		
+	delition (Head,5) ;
+	display(Head);	
 		
 return 0 ;
 }
