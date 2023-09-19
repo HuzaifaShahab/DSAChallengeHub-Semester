@@ -35,7 +35,7 @@ void insertAtTail (int data , node * &Head){
  
  bool searchInLinkedList (node * Head , int key){
  	node * temp = Head ;
-	 	while (temp->next != key){
+	 	while (temp->next != nullptr){
 	 		if (temp->data == key) return true ;
 	 		temp = temp-> next ;
 		 }
@@ -60,7 +60,7 @@ int main (){
 	insertAtTail (5,Head) ;
 	insertAtHead (78,Head);
 		display (Head) ;
-	bool found = searchInLinkedList (Head , 6) ;
+	bool found = searchInLinkedList (Head , 787) ;
 	
 		if (found) cout << "Key has been found in list" ;
 		else cout << "Key not in list!" ;
