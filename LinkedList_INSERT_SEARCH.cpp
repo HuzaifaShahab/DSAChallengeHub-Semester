@@ -56,9 +56,9 @@ void insertAtTail (int data , node * &Head){
 	 }				
 	 
 void delitionInHead (node * &head){
-//	if (head == nullptr){
-//		return ;
-//	}
+	if (head == nullptr){
+		return ;
+	}
 	
 	node * todelete = head ;
 	cout << head->data << " Head Deleted !" <<endl ;
@@ -78,6 +78,21 @@ void delition (node * head,int value){
     cout << temp->next->data << " Deleted Succesfully !"<<endl ;
     temp->next = temp->next->next ;  // n+1
 	 delete todelete ;
+}
+
+void sortingLinkedList (node * &head){
+	node * temp = head ;
+	while (temp->next = nullptr){
+		node * t = temp->next ;
+		
+		if (temp->data > t->data){
+			t->next = head ;
+			temp -> next = t->next ; 
+		}
+		
+			temp = temp->next ;
+		
+	}
 }
 int main (){
 	node * Head = nullptr;
@@ -101,7 +116,9 @@ int main (){
 	delition (Head,5) ;
 		display(Head);	
 	delitionInHead (Head);
-		display(Head);	
+		display(Head);
+	sortingLinkedList (Head);	
+		display(Head);
 		
 return 0 ;
 }
