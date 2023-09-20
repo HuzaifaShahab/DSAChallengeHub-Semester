@@ -81,32 +81,40 @@ void delition (node * head,int value){
 }
 
 void sortingLinkedList (node * &head){
-	node * temp = head ;
-	while (temp->next = nullptr){
-		node * t = temp->next ;
-		
-		if (temp->data > t->data){
-			t->next = head ;
-			temp -> next = t->next ; 
-		}
-		
-			temp = temp->next ;
-		
-	}
+bool swapped;
+   
+        node* current = head;
+        node* nextNode = head->next;
+
+        while (nextNode != nullptr) {
+            if (current->data > nextNode->data) {
+                // Swap current and nextNode values
+                int temp = current->data;
+                current->data = nextNode->data;
+                nextNode->data = temp;
+            }
+
+            // Move to the next nodes
+            current = nextNode;
+            nextNode = nextNode->next;
+        }
+    
+
+   
 }
 int main (){
 	node * Head = nullptr;
 	
 	insertAtHead (2,Head);
-		display (Head) ;
+//		display (Head) ;
 	insertAtHead (5,Head);
-		display (Head) ;
+//		display (Head) ;
 	insertAtHead (6,Head);
-		display (Head) ;
+//		display (Head) ;
 	insertAtTail (5,Head) ;
-		display (Head) ;
+//		display (Head) ;
 	insertAtHead (78,Head);
-		display (Head) ;
+//		display (Head) ;
 	
 		bool found = searchInLinkedList (Head , 787) ;
 	
@@ -114,7 +122,7 @@ int main (){
 		else cout << "Key not in list!" << endl;
 		
 	delition (Head,5) ;
-		display(Head);	
+//		display(Head);	
 	delitionInHead (Head);
 		display(Head);
 	sortingLinkedList (Head);	
