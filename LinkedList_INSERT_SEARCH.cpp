@@ -81,11 +81,10 @@ void delition (node * head,int value){
 }
 
 void sortingLinkedList (node * &head){
-bool swapped;
-   
+
         node* current = head;
         node* nextNode = head->next;
-
+//  3-2-5-1-4
         while (nextNode != nullptr) {
             if (current->data > nextNode->data) {
                 // Swap current and nextNode values
@@ -97,23 +96,37 @@ bool swapped;
             // Move to the next nodes
             current = nextNode;
             nextNode = nextNode->next;
+            
+            current = head;
+      		nextNode = head->next;
+        while (nextNode != nullptr) {
+        	while (nextNode != nullptr){
+        		 if (current->data > nextNode->data) {
+                // Swap current and nextNode values
+	                int temp = current->data;
+	                current->data = nextNode->data;
+	                nextNode->data = temp;
+			}
+           		current = nextNode;
+           	    nextNode = nextNode->next;
+            }
+             nextNode = nextNode->next;
         }
-    
-
-   
 }
-int main (){
+}
+
+int main () {
 	node * Head = nullptr;
 	
-	insertAtHead (2,Head);
+	insertAtHead (1,Head);
 //		display (Head) ;
 	insertAtHead (5,Head);
 //		display (Head) ;
-	insertAtHead (6,Head);
+	insertAtHead (2,Head);
 //		display (Head) ;
-	insertAtTail (5,Head) ;
+	insertAtTail (4,Head) ;
 //		display (Head) ;
-	insertAtHead (78,Head);
+	insertAtHead (3,Head);
 //		display (Head) ;
 	
 		bool found = searchInLinkedList (Head , 787) ;
@@ -121,12 +134,12 @@ int main (){
 		if (found) cout << "Key has been found in list" << endl ;
 		else cout << "Key not in list!" << endl;
 		
-	delition (Head,5) ;
+//	delition (Head,5) ;
 //		display(Head);	
-	delitionInHead (Head);
+//	delitionInHead (Head);
 		display(Head);
 	sortingLinkedList (Head);	
 		display(Head);
 		
 return 0 ;
-}
+ }
