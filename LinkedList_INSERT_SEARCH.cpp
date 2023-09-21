@@ -49,7 +49,7 @@ void insertAtTail (int data , node * &Head){
  void display (node * Head){
  	node * temp = Head ;
 		while (temp != nullptr){
-	 		cout << temp->data << "->" ;
+	 		cout << temp->data << "->";
 	 		temp = temp->next ;
 		 }
 		    cout << "null" << endl ;
@@ -81,39 +81,44 @@ void delition (node * head,int value){
 }
 
 void sortingLinkedList (node * &head){
-
-        node* current = head;
-        node* nextNode = head->next;
-//  3-2-5-1-4
-        while (nextNode != nullptr) {
-            if (current->data > nextNode->data) {
-                // Swap current and nextNode values
-                int temp = current->data;
-                current->data = nextNode->data;
-                nextNode->data = temp;
-            }
-
-            // Move to the next nodes
-            current = nextNode;
-            nextNode = nextNode->next;
-            
-            current = head;
-      		nextNode = head->next;
-        while (nextNode != nullptr) {
-        	while (nextNode != nullptr){
-        		 if (current->data > nextNode->data) {
-                // Swap current and nextNode values
-	                int temp = current->data;
-	                current->data = nextNode->data;
-	                nextNode->data = temp;
+     	node * a ;
+		node * b ; 
+		int temp1 ;
+	
+		for (a = head ; a->next != nullptr ; a = a->next ){
+			
+			for (b = head->next ; b -> next!= nullptr ; b = b -> next ){
+				
+			     temp1 = b->data ;
+				b -> data = a->data ;
+				a->data = temp1 ;
+				
 			}
-           		current = nextNode;
-           	    nextNode = nextNode->next;
-            }
-             nextNode = nextNode->next;
-        }
+		}
+//
+//        node* current ;
+//        node* nextNode ;
+//        node * temp = head ;
+//        5 4 1 2 3
+//        while (temp->next != nullptr) {
+//        		nextNode = temp->next ;
+//        		current=head ;
+//        		
+//        	while (nextNode != nullptr){
+//        		 if (current->data > nextNode->data) {
+//                // Swap current and nextNode values
+//	                int temp = current->data;
+//	                current->data = nextNode->data;
+//	                nextNode->data = temp;
+//           }
+//           		current = nextNode;   
+//			    nextNode = nextNode->next;
+//           	    
+//            }
+//             temp = temp->next;
+//        }
 }
-}
+
 
 int main () {
 	node * Head = nullptr;
@@ -126,8 +131,10 @@ int main () {
 //		display (Head) ;
 	insertAtTail (4,Head) ;
 //		display (Head) ;
-	insertAtHead (3,Head);
+//	insertAtHead (3,Head);
 //		display (Head) ;
+	insertAtHead (3,Head);
+
 	
 		bool found = searchInLinkedList (Head , 787) ;
 	
