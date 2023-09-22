@@ -46,10 +46,29 @@ void insertAtTail (int data , node * &Head){
 		 }
 			 return false ;
  }
+ 
+ void insertAtSpecificPostion (node *& head , int nodeInsert){
+ 	
+ 	if (head == nullptr && head->next == nullptr){
+ 		return ;
+	 }
+	 
+	 node * temp = head ;
+	 node * newNode = new node (45) ; 
+	 
+		 while (temp->next != nullptr){
+		 	 if (temp->data == nodeInsert){
+			 	 	newNode->next = temp->next ; 
+			 	 	temp -> next = newNode ;	
+			  }
+			  temp = temp->next ;
+		 }
+ 	
+ }
  void display (node * Head){
  	node * temp = Head ;
 		while (temp != nullptr){
-	 		cout << temp->data << "->";
+	 		cout << temp->data << "      ";
 	 		temp = temp->next ;
 		 }
 		    cout << "null" << endl ;
@@ -67,7 +86,7 @@ void delitionInHead (node * &head){
 	delete todelete ;
 	
 }	 
-void delition (node * head,int value){
+void deletion (node * head,int value){
 	node * temp = head;
 	// n-1
 		while (temp->next->data != value){
@@ -134,7 +153,8 @@ int main () {
 //	insertAtHead (3,Head);
 //		display (Head) ;
 	insertAtHead (3,Head);
-
+		display(Head);
+	insertAtSpecificPostion (Head , 5) ;
 	
 		bool found = searchInLinkedList (Head , 787) ;
 	
@@ -144,8 +164,8 @@ int main () {
 //	delition (Head,5) ;
 //		display(Head);	
 //	delitionInHead (Head);
-		display(Head);
-	sortingLinkedList (Head);	
+	
+//	sortingLinkedList (Head);	
 		display(Head);
 		
 return 0 ;
