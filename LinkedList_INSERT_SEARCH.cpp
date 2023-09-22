@@ -56,19 +56,18 @@ void insertAtTail (int data , node * &Head){
 	 node * temp = head ;
 	 node * newNode = new node (45) ; 
 	 
-		  while (temp->next != nullptr){
-		 	 if (temp->data == nodetoInsAft){
-			 	 	newNode->next = temp->next ; 
-			 	 	temp -> next = newNode ;	
-			  }
-			  temp = temp->next ;
-		 }
- 	
+	 while (temp->next != nullptr){
+		 if (temp->data == nodetoInsAft){
+	 	 	newNode->next = temp->next ; 
+		 	temp -> next = newNode ;	
+			}
+		    temp = temp->next ;
+		 }	
  }
  void display (node * Head){
  	node * temp = Head ;
 		while (temp != nullptr){
-	 		cout << temp->data << "      ";
+	 		cout << temp->data << "-->";
 	 		temp = temp->next ;
 		 }
 		    cout << "null" << endl ;
