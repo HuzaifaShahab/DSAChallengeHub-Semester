@@ -47,7 +47,7 @@ void insertAtTail (int data , node * &Head){
 			 return false ;
  }
  
- void insertAtSpecificPostion (node *& head , int nodeInsert){
+ void insertAtSpecificPostion (node *& head , int nodetoInsAft){
  	
  	if (head == nullptr && head->next == nullptr){
  		return ;
@@ -56,8 +56,8 @@ void insertAtTail (int data , node * &Head){
 	 node * temp = head ;
 	 node * newNode = new node (45) ; 
 	 
-		 while (temp->next != nullptr){
-		 	 if (temp->data == nodeInsert){
+		  while (temp->next != nullptr){
+		 	 if (temp->data == nodetoInsAft){
 			 	 	newNode->next = temp->next ; 
 			 	 	temp -> next = newNode ;	
 			  }
