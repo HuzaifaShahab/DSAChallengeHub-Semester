@@ -147,12 +147,12 @@ void midpointFind (node * &head){
 	slow = head ;
 	fast = head ;
 //	cout <<"Hello" ; 
-	while (fast->next != nullptr){
+	while (fast != nullptr && fast->next != nullptr){
 		slow = slow->next ;
 		fast = fast->next->next ;
 		
 	}
-	cout <<"Midpoint is : " << slow->data ;
+	cout <<endl<<"Midpoint is : " << slow->data ;
 }
 
 
@@ -170,6 +170,7 @@ int main () {
 //	insertAtHead (3,Head);
 //		display (Head) ;
 	insertAtHead (3,Head);
+	insertAtHead (35,Head);
 		display(Head);
 	insertAtSpecificPostion (Head , 5) ;
 	
