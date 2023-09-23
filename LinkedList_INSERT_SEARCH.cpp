@@ -1,4 +1,4 @@
-#include <iostream>
+ #include <iostream>
 using namespace std ;
 
 class node {
@@ -99,20 +99,52 @@ void deletion (node * head,int value){
 }
 
 void sortingLinkedList (node * &head){
-     	node * a ;
-		node * b ; 
-		int temp1 ;
 	
-		for (a = head ; a->next != nullptr ; a = a->next ){
-			
-			for (b = head->next ; b -> next!= nullptr ; b = b -> next ){
-				
-			     temp1 = b->data ;
-				b -> data = a->data ;
-				a->data = temp1 ;
-				
-			}
-		}
+    cout << "Sorting linked list..." << endl; // Print a message to indicate we're sorting.
+
+    if (head == nullptr) {
+        cout << "No nodes found in the linked list to be sorted i.e. the linked list is empty." << endl;
+        return; // If the linked list is empty, no sorting is needed.
+    } 
+
+    bool swapped; // A flag to track whether any swaps were made in a pass.
+    node* temp; // A temporary pointer for traversing the linked list.
+    node* last = nullptr; // Keeps track of the last swapped element.
+
+    do {
+        swapped = false; // Assume no swaps are needed at the beginning of each pass.
+        temp = head; // Start from the beginning of the list.
+
+        while (temp->next != last) { // Go through the list until the last swapped element.
+            if (temp->data > temp->next->data) {
+                // Swap data between two adjacent nodes.
+                int current = temp->data;
+                temp->data = temp->next->data;
+                temp->next->data = current;
+                swapped = true; // Set the flag to true to indicate a swap occurred.
+            }
+            temp = temp->next; // Move to the next pair of nodes.
+        }
+        last = temp; // Update the last swapped element for optimization.
+    } while (swapped); // Continue until no more swaps are needed.
+
+//    cout << "Linked list after sorting: " << endl;
+//    display(head); // Display the sorted linked list.
+
+//     	node * a ;
+//		node * b ; 
+//		int temp1 ;
+//	
+//		for (a = head ; a->next != nullptr ; a = a->next ){
+//			
+//			for (b = head->next ; b -> next!= nullptr ; b = b -> next ){
+//				
+//			     temp1 = b->data ;
+//				b -> data = a->data ;
+//				a->data = temp1 ;
+//				
+//			}
+//		}
 //
 //        node* current ;
 //        node* nextNode ;
@@ -164,7 +196,7 @@ int main () {
 //		display(Head);	
 //	delitionInHead (Head);
 	
-//	sortingLinkedList (Head);	
+	sortingLinkedList (Head);	
 		display(Head);
 		
 return 0 ;
