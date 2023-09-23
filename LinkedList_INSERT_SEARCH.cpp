@@ -67,7 +67,7 @@ void insertAtTail (int data , node * &Head){
  void display (node * Head){
  	node * temp = Head ;
 		while (temp != nullptr){
-	 		cout << temp->data << "-->";
+	 		cout << temp->data << " --> ";
 	 		temp = temp->next ;
 		 }
 		    cout << "null" << endl ;
@@ -103,73 +103,43 @@ void sortingLinkedList (node * &head){
     cout << "Sorting linked list..." << endl; // Print a message to indicate we're sorting.
 
     if (head == nullptr) {
-        cout << "No nodes found in the linked list to be sorted i.e. the linked list is empty." << endl;
-        return; // If the linked list is empty, no sorting is needed.
+        cout << "No nodes found in the linked list to be sorted" << endl;
+        return ; 
     } 
 
-    bool swapped; // A flag to track whether any swaps were made in a pass.
-    node* temp; // A temporary pointer for traversing the linked list.
-    node* last = nullptr; // Keeps track of the last swapped element.
+    bool swapped; 
+    node* temp; 
+    node* last = nullptr; 
 
     do {
-        swapped = false; // Assume no swaps are needed at the beginning of each pass.
-        temp = head; // Start from the beginning of the list.
-
-        while (temp->next != last) { // Go through the list until the last swapped element.
+        swapped = false; 
+        temp = head; 
+        while (temp->next != last) { 
             if (temp->data > temp->next->data) {
-                // Swap data between two adjacent nodes.
+                // Swap data between two  nodes.
                 int current = temp->data;
                 temp->data = temp->next->data;
                 temp->next->data = current;
-                swapped = true; // Set the flag to true to indicate a swap occurred.
+                swapped = true; 
             }
-            temp = temp->next; // Move to the next pair of nodes.
+            temp = temp->next; 
         }
-        last = temp; // Update the last swapped element for optimization.
-    } while (swapped); // Continue until no more swaps are needed.
-
-//    cout << "Linked list after sorting: " << endl;
-//    display(head); // Display the sorted linked list.
-
-//     	node * a ;
-//		node * b ; 
-//		int temp1 ;
-//	
-//		for (a = head ; a->next != nullptr ; a = a->next ){
-//			
-//			for (b = head->next ; b -> next!= nullptr ; b = b -> next ){
-//				
-//			     temp1 = b->data ;
-//				b -> data = a->data ;
-//				a->data = temp1 ;
-//				
-//			}
-//		}
-//
-//        node* current ;
-//        node* nextNode ;
-//        node * temp = head ;
-//        5 4 1 2 3
-//        while (temp->next != nullptr) {
-//        		nextNode = temp->next ;
-//        		current=head ;
-//        		
-//        	while (nextNode != nullptr){
-//        		 if (current->data > nextNode->data) {
-//                // Swap current and nextNode values
-//	                int temp = current->data;
-//	                current->data = nextNode->data;
-//	                nextNode->data = temp;
-//           }
-//           		current = nextNode;   
-//			    nextNode = nextNode->next;
-//           	    
-//            }
-//             temp = temp->next;
-//        }
+        last = temp; 
+    } while (swapped); 
 }
 
-
+void traverseLinkedList (node * head) {
+	cout << "Traversing Linked List...." ;
+	
+	node * temp = head ;
+	cout<<endl;
+	while (temp->next != nullptr){
+		cout <<temp->data << " --> " ;
+		temp = temp->next ;
+	}
+	cout<<temp->data ;
+	cout<<" --> null" ;
+}
 int main () {
 	node * Head = nullptr;
 	
@@ -198,6 +168,7 @@ int main () {
 	
 	sortingLinkedList (Head);	
 		display(Head);
+	traverseLinkedList(Head) ;
 		
 return 0 ;
  }
