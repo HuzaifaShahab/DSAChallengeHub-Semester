@@ -64,6 +64,7 @@ void insertAtTail (int data , node * &Head){
 		    temp = temp->next ;
 		 }	
  }
+ 
  void display (node * Head){
  	node * temp = Head ;
 		while (temp != nullptr){
@@ -140,6 +141,21 @@ void traverseLinkedList (node * head) {
 	cout<<temp->data ;
 	cout<<" --> null" ;
 }
+
+void midpointFind (node * &head){
+	node * fast , *slow ;
+	slow = head ;
+	fast = head ;
+//	cout <<"Hello" ; 
+	while (fast->next != nullptr){
+		slow = slow->next ;
+		fast = fast->next->next ;
+		
+	}
+	cout <<"Midpoint is : " << slow->data ;
+}
+
+
 int main () {
 	node * Head = nullptr;
 	
@@ -169,6 +185,7 @@ int main () {
 	sortingLinkedList (Head);	
 		display(Head);
 	traverseLinkedList(Head) ;
+	midpointFind (Head) ;
 		
 return 0 ;
  }
