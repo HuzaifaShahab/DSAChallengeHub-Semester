@@ -66,7 +66,7 @@ void insertAtTail (int data , node * &Head){
 	 }
 	 
 	 node * temp = head ;
-	 node * newNode = new node (45) ; 
+	 node * newNode = new node (nodetoInsAft) ; 
 	 
 	 while (temp->next != nullptr){
 		 if (temp->data == nodetoInsAft){
@@ -77,14 +77,16 @@ void insertAtTail (int data , node * &Head){
 		 }	
  }
  
- void searchInLinkedList (node * Head , int key){
+ bool searchInLinkedList (node * Head,int key){
  	node * temp = Head ;
  	cout << key << " is the key" <<endl;
 	 	while (temp->next != nullptr){
-	 		if (temp->data == key) cout<<"Key Found!" ;
+	 		if (temp->data == key) 
+			 return true ;
 	 		temp = temp-> next ;
 		 }
-			cout << "Key not found!";
+		 return false ;
+			
  }
  
  
@@ -116,6 +118,10 @@ void deletionInHead (node * &head){
  
 void deletion (node * head, int value){
 	node * temp = head;
+	if (head == nullptr){
+		cout << "No node found" ;
+		return ;
+	}
 	// n-1
 		while (temp->next->data != value){
 			temp = temp -> next ;
@@ -246,7 +252,10 @@ int main () {
 				 cout << "Input Key to search for node" << endl;
 				int Key;
 			    cin>>Key ;
-				searchInLinkedList(Head,Key) ;
+			    
+				bool flag = searchInLinkedList(Head,Key) ;
+					if(flag) cout<<"Key Has Been Found"<<endl; 
+					else cout <<"Key not found" <<endl;
 		}
 		else if (choice == 7){
 				sortingLinkedList(Head) ;
