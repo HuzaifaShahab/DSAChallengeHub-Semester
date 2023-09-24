@@ -21,6 +21,8 @@ void initializeLinkedList (node * &head , int data){
 			newNode->next = head ;
 			head = newNode ;
 			cout << "linked List has been initialized...";
+		}else {
+			cout << "Already initialized !" ;
 		}			
 }
 
