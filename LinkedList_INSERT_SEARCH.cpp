@@ -16,13 +16,12 @@ class node {
 
 void initializeLinkedList (node * &head , int data){
 	node * temp = head ;
-	
-		if (temp == nullptr && temp -> next == nullptr){
-			node newNode = new node (data) ; 
-			return ;
-		}	
-		else 
-		  return ;
+		if (temp == nullptr){
+			node *newNode = new node (data) ; 
+			newNode->next = head ;
+			head = newNode ;
+			cout << "linked List has been initialized...";
+		}			
 }
 
 // Inserting a node at the beginning (Head)
@@ -76,16 +75,15 @@ void insertAtTail (int data , node * &Head){
 		 }	
  }
  
- bool searchInLinkedList (node * Head , int key){
+ void searchInLinkedList (node * Head , int key){
  	node * temp = Head ;
  	cout << key << " is the key" <<endl;
 	 	while (temp->next != nullptr){
-	 		if (temp->data == key) return true ;
+	 		if (temp->data == key) cout<<"Key Found!" ;
 	 		temp = temp-> next ;
 		 }
-			 return false ;
+			cout << "Key not found!";
  }
- 
  
  
  void display (node * Head){
@@ -196,113 +194,71 @@ int main () {
 	int choice = 0 ;
 	do {
 		 
-		cout << "With which operation you want to go ? \n" << endl;
+		cout << "\nWith which operation you want to go ? \n" << endl;
 		
 		cout << "  1. Initialize an empty linked list" << endl ;
 		cout << "  2. Insert a node at the beginning" << endl ;
 		cout << "  3. Insert a node at the end" << endl ;
 		cout << "  4. Insert a node at a given position" << endl ;
 		cout << "  5. Delete a specific node" << endl ;
-        cout << "  7. Search for specific node" << endl ;
-		cout << "  8. Sort the Linked list" << endl ;
-		cout << "  6. Print the elements of the linked list" << endl ;
+        cout << "  6. Search for specific node" << endl ;
+		cout << "  7. Sort the Linked list" << endl ;
+		cout << "  8. Print the elements of the linked list" << endl ;
 		cout << "  9. Exit\n" << endl ; 
 		
 		cout << "Select particular serial No. for operation (1 - 9)" << endl ;
 		cin >> choice ;
 		
-		switch (choice) {
-			case 1 : 
+		if (choice == 1){
 				cout << "Input element with which you want to initialize Link.list" << endl;
-				int data=0 ;
-				cin>>data ;
-				initializeLinkedList(Head,data) ;
-				break ;
-			case 2 : 
+				int val_ ;
+				cin>>val_ ;
+				initializeLinkedList(Head,val_) ;
+		}
+		else if (choice == 2){
 				cout << "Input data to insert a node at the beginning" << endl;
-				int data=0 ;
-				cin>>data ;
-				insertAtHead(data,Head) ;
-				break ;	
-			case 3 : 
-			    cout << "Input data to insert a node at the end" << endl;
-				int data=0 ;
-				cin>>data ;
-				insertAtTail(data,Head) ;
-				break ;	
-			case 4 : 
-			    cout << "Input data to insert a node at the end" << endl;
-				int data=0 ;
-				cin>>data ;
-				insertAtTail(data,Head) ;
-				break ;			
-			case 5 : 
-			    cout << "Input data to insert a node at the end" << endl;
-				int data=0 ;
-				cin>>data ;
-				insertAtTail(data,Head) ;
-				break ;	
-			case 6 : 
-			    cout << "Input data to insert a node at the end" << endl;
-				int data=0 ;
-				cin>>data ;
-				insertAtTail(data,Head) ;
-				break ;	
-			case 7 : 
-			    cout << "Input data to insert a node at the end" << endl;
-				int data=0 ;
-				cin>>data ;
-				insertAtTail(data,Head) ;
-				break ;	
-			case 8 : 
-			    cout << "Input data to insert a node at the end" << endl;
-				int data=0 ;
-				cin>>data ;
-				insertAtTail(data,Head) ;
-				break ;	
-			case 9 : 
-			    cout << "Input data to insert a node at the end" << endl;
-				int data=0 ;
-				cin>>data ;
-				insertAtTail(data,Head) ;
-				break ;		
+				int val ;
+				cin>>val ;
+				insertAtHead(val,Head) ;
 				
 		}
-		
-	}while ();
-	
-	
-//	
-//	insertAtHead (1,Head);
-////		display (Head) ;
-//	insertAtHead (5,Head);
-////		display (Head) ;
-//	insertAtHead (2,Head);
-////		display (Head) ;
-//	insertAtTail (4,Head) ;
-////		display (Head) ;
-////	insertAtHead (3,Head);
-////		display (Head) ;
-//	insertAtHead (3,Head);
-//	insertAtHead (35,Head);
-//		display(Head);
-//		
-//	
-//	insertAtSpecificPostion (Head , 5) ;
-//	
-//		bool found = searchInLinkedList (Head , 787) ;
-//	
-//		if (found) cout << "Key has been found in list" << endl ;
-//		else cout << "Key not in list!" << endl;
-//		
-////	delition (Head,5) ;
-////		display(Head);	
-////	delitionInHead (Head);
-//	
-//	sortingLinkedList (Head);	
-//		display(Head);
-//	traverseLinkedList(Head) ;
-//	midpointFind (Head) ;
+		else if (choice == 3){
+				  cout << "Input data to insert a node at the end" << endl;
+				int val1 ;
+				cin>>val1 ;
+				insertAtTail(val1,Head) ;
+		}
+		else if (choice == 4){
+				 cout << "Input specific position to insert a node after it" << endl;
+				int nodeToInsAft ;
+				cin>>nodeToInsAft ;
+				insertAtSpecificPostion(Head,nodeToInsAft) ;
+		}
+		else if (choice == 5){
+			cout << "Input node data to delete permanently" << endl;
+				int val2;
+				cin>>val2 ;
+				deletion(Head,val2) ;
+		}
+		else if (choice == 6){
+				 cout << "Input Key to search for node" << endl;
+				int Key;
+			    cin>>Key ;
+				searchInLinkedList(Head,Key) ;
+		}
+		else if (choice == 7){
+				sortingLinkedList(Head) ;
+				cout << "Linked list Successfully Sorted" << endl;
+		}
+		else if (choice == 8){
+				 cout << "\nPrinting the elements of the linked list" << endl;
+				display(Head) ;
+		}
+		else if (choice == 9){
+				cout << "\nThanks, Have a nice day." << endl;
+		}
+			
+	}while (choice!=9);
 		
 return 0 ;
  }
