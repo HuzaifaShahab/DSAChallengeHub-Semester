@@ -20,9 +20,9 @@ void initializeLinkedList (node * &head , int data){
 			node *newNode = new node (data) ; 
 			newNode->next = head ;
 			head = newNode ;
-			cout << "linked List has been initialized...";
+			cout << "\nlinked List has been initialized...\n\n";
 		}else {
-			cout << "Already initialized !" ;
+			cout << "\nAlready initialized !\n\n" ;
 		}			
 }
 
@@ -34,7 +34,7 @@ void insertAtHead (int data , node * &Head){
 	newNode->next = Head ;
 	Head = newNode ;
 	
-	cout << data <<" as Head in list"<<endl;
+	cout << endl << data <<" as Head in list"<<endl;
 }
 
 // Inserting a node at the end (Tail)
@@ -44,7 +44,7 @@ void insertAtTail (int data , node * &Head){
  	
 	 if (Head == nullptr){
  		Head = newNode ;
- 		cout << data << " as Tail in list" <<endl ;
+ 		cout << endl << data << " inserted in list" <<endl ;
  		return ;
 	 }
 	 
@@ -54,7 +54,7 @@ void insertAtTail (int data , node * &Head){
 		 	temp = temp->next ;
 		 }
 		 temp->next =  newNode ;	 
-		 cout << data << " as Tail in list" << endl ;
+		 cout << endl <<data << " as Tail in list" << endl ;
  }
  
 // Inserting a node at any specific position choose by a user
@@ -62,6 +62,7 @@ void insertAtTail (int data , node * &Head){
  void insertAtSpecificPostion (node *& head , int nodetoInsAft){
  	
  	if (head == nullptr && head->next == nullptr){
+ 		cout << "\nNode inserted in list successfully...\n\n";
  		return ;
 	 }
 	 
@@ -74,12 +75,13 @@ void insertAtTail (int data , node * &Head){
 		 	temp -> next = newNode ;	
 			}
 		    temp = temp->next ;
-		 }	
+		 }
+    	cout << "\nNode inserted in list successfully...\n\n";	
  }
  
  bool searchInLinkedList (node * Head,int key){
  	node * temp = Head ;
- 	cout << key << " is the key" <<endl;
+ 	cout << key << " is the key to search for." <<endl;
 	 	while (temp->next != nullptr){
 	 		if (temp->data == key) 
 			 return true ;
@@ -92,11 +94,12 @@ void insertAtTail (int data , node * &Head){
  
  void display (node * Head){
  	node * temp = Head ;
+ 	cout<<endl ;
 		while (temp != nullptr){
 	 		cout << temp->data << " --> ";
 	 		temp = temp->next ;
 		 }
-		    cout << "null" << endl ;
+		    cout << "null\n\n" << endl ;
 	 }				
 
 // If User Specifically want to delete the head of linked list
@@ -105,9 +108,8 @@ void deletionInHead (node * &head){
 	if (head == nullptr){
 		return ;
 	}
-	
 	node * todelete = head ;
-	cout << head->data << " Head Deleted !" <<endl ;
+	cout << head->data << " Head Deleted !\n\n" <<endl ;
 	head = head -> next ;
 	
 	delete todelete ;
@@ -118,42 +120,46 @@ void deletionInHead (node * &head){
  
 void deletion (node * head, int value){
 	node * temp = head;
+
 	if (head == nullptr){
-		cout << "No node found" ;
+		cout << "\nNo node found\n\n" ;
 		return ;
+	else if (head->next == nullptr){
+			node * todelete = head ;
+		}
 	}
-	// n-1
+// n-1
 		while (temp->next->data != value){
 			temp = temp -> next ;
 		}
 	
 	    node * todelete = temp->next ; // n
-	    cout << temp->next->data << " Deleted Succesfully !"<<endl ;
+	    cout << temp->next->data << " Deleted Succesfully !\n\n"<<endl ;
 	    temp->next = temp->next->next ;  // n+1
-		 delete todelete ;
+		 delete todelete , head  ;
 }
 
 // Sorted LinkedList using concept of Bubble sort
 
 void sortingLinkedList (node * &head){
 	
-    cout << "Sorted linked list" << endl ; 
+    cout << "\nSorted linked list\n" << endl ; 
 
     if (head == nullptr) {
-        cout << "No nodes found in the linked list to be sorted" << endl;
+        cout << "No nodes found to sort" << endl;
         return ; 
     } 
 
-    bool swapped; 
+    bool flag; 
     node* temp; 
     node* last = nullptr; 
 
 	    do {
-	        swapped = false; 
+	        flag = false; 
 	        temp = head; 
 	        while (temp->next != last) { 
 	            if (temp->data > temp->next->data) {
-	                // Swap data between two  nodes.
+	                // swappinng using third variable
 	                int current = temp->data;
 	                temp->data = temp->next->data;
 	                temp->next->data = current;
@@ -161,14 +167,14 @@ void sortingLinkedList (node * &head){
 	            }
 	            temp = temp->next; 
 	        }
-	        last = temp; 
-	    } while (swapped); 
+	        last = temp; // For starting loop again and again  to sort our linked list
+	    } while (flag); 
 }
 
 // Traversing Linked List
 
 void traverseLinkedList (node * head) {
-	cout << "Traversing Linked List" ;
+	cout << "\nTraversing Linked List\n" ;
 	
 	node * temp = head ;
 	cout<<endl;
