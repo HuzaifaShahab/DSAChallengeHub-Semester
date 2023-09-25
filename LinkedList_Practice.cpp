@@ -185,17 +185,16 @@ void traverseLinkedList (node * head) {
 
     node * temp = head ;
     cout<<endl;
-    while (temp->next != nullptr){
+    while (temp != nullptr){
         cout <<temp->data << " --> " ;
         temp = temp->next ;
     }
-    cout<<temp->data ;
     cout<<" --> null" ;
 }
 
 // Code To find midpoint in a Linkedlist
 
-void midpointFind (node * &head){
+node * midpointFind (node * &head){
     node * fast , *slow ;
     slow = head ;
     fast = head ;
@@ -203,11 +202,70 @@ void midpointFind (node * &head){
     while (fast != nullptr && fast->next != nullptr){
         slow = slow->next ;
         fast = fast->next->next ;
-
     }
-    cout <<endl<<"Midpoint is : " << slow->data ;
+   return slow ;
 }
 
+node * mergeLinkedList(node*left , node*right){
+	
+	if (left == nullptr) return right ;
+	
+	if (right = nullptr) return left ;
+	
+	node * dummyNode = new node (-1) ;
+	node * temp = dummyNode ;
+	
+	while (left != nullptr && right != nullptr){
+			
+			if (left->data < right->data){
+				temp->next = left ;
+				temp = left ;
+				left = left->next ;	
+			}
+			else {
+				temp->next = right ;
+				temp = right ;
+				left = right->next ;
+			}
+	}
+
+
+	while (left != nullptr){
+		temp->next = left ;
+		temp = left ;
+		left = left->next ;	
+	}
+	while (right != nullptr){
+		temp->next = right ;
+		temp = right ;
+		left = right->next ;
+	}
+		dummyNode = dummyNode->next ;
+	
+	return dummyNode ;
+}
+
+node * mergeSort (node*&head){
+	if (head == nullptr || head->next == nullptr){
+		return head;
+	}
+	
+//	Now to find mide point of a linked List 
+
+	node * mid = midpointFind(head) ;
+	
+		node * left = head; 
+		node * right = mid->next ;
+		mid->next = nullptr ;
+		
+//		Now by recursive calls going to sort Linked List
+
+	left = mergeSort(left) ;
+	right = mergeSort(right) ;
+	
+	node * final = mergeLinkedList (left,right) ;
+	return final ;
+}
 
 int main () {
 
@@ -217,15 +275,16 @@ int main () {
 
         cout << "\nWith which operation you want to go ? \n" << endl;
 
-        cout << "  1. Initialize an empty linked list" << endl ;
-        cout << "  2. Insert a node at the beginning" << endl ;
-        cout << "  3. Insert a node at the end" << endl ;
-        cout << "  4. Insert a node at a given position" << endl ;
-        cout << "  5. Delete a specific node" << endl ;
-        cout << "  6. Search for specific node" << endl ;
-        cout << "  7. Sort the Linked list" << endl ;
-        cout << "  8. Print the elements of the linked list" << endl ;
-        cout << "  9. Exit\n" << endl ;
+        cout << "  1.  Initialize an empty linked list" << endl ;
+        cout << "  2.  Insert a node at the beginning" << endl ;
+        cout << "  3.  Insert a node at the end" << endl ;
+        cout << "  4.  Insert a node at a given position" << endl ;
+        cout << "  5.  Delete a specific node" << endl ;
+        cout << "  6.  Search for specific node" << endl ;
+        cout << "  7.  Sort the Linked list using Bubble Sort" << endl ;
+    	cout << "  8.  Sort the Linked list using Merge Sort" << endl ;
+        cout << "  9.  Print the elements of the linked list" << endl ;
+        cout << "  10. Exit\n" << endl ;
 
         cout << "Select particular serial No. for operation (1 - 9)" << endl ;
         cin >> choice ;
@@ -272,17 +331,23 @@ int main () {
         }
         else if (choice == 7){
             sortingLinkedList(Head) ;
-            cout << "Linked list Successfully Sorted" << endl;
+            cout << "Linked list Successfully Sorted through Bubble Sort" << endl;
         }
         else if (choice == 8){
+        	sortingLinkedList(Head) ;
+//            node * head = mergeSort(Head) ;
+//            display(head);
+            cout << "Linked list Successfully Sorted through Merge Sort" << endl;
+        }
+        else if (choice == 9){
             cout << "\nPrinting the elements of the linked list" << endl;
             display(Head) ;
         }
-        else if (choice == 9){
+        else if (choice == 10){
             cout << "\nThanks, Have a nice day." << endl;
         }
 
-    }while (choice!=9);
+    }while (choice!=10);
 
     return 0 ;
 }
