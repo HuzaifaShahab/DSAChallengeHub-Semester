@@ -6,7 +6,7 @@ public :
     int data ;
     node * next ;
 
-    node (int data){
+    node (int data){  // Parametrized Constructor
         this->data = data ;
         this->next = nullptr ;
     }
@@ -16,7 +16,7 @@ public :
 
 void initializeLinkedList (node * &head , int data){
     node * temp = head ;
-    if (temp == nullptr){
+    if (temp == nullptr){ // Will Initialized the linkedList
         node *newNode = new node (data) ;
         newNode->next = head ;
         head = newNode ;
@@ -30,7 +30,7 @@ void initializeLinkedList (node * &head , int data){
 
 void insertAtHead (int data , node * &Head){
 
-    node * newNode = new node (data);
+    node * newNode = new node (data); // Node created on Heap memory
     newNode->next = Head ;
     Head = newNode ;
 
@@ -53,8 +53,8 @@ void insertAtTail (int data , node * &Head){
     while (temp->next != nullptr){
         temp = temp->next ;
     }
-    temp->next =  newNode ;
-    cout << endl <<data << " as Tail in list" << endl ;
+    	temp->next =  newNode ;
+    	cout << endl <<data << " as Tail in list" << endl ;
 }
 
 // Inserting a node at any specific position choose by a user
@@ -67,19 +67,21 @@ void insertAtSpecificPosition (node *& head , int nodeToInsAft){
     }
     int value ;
     node * temp = head ;
-    cout << "Input Data " <<endl;
+    cout << "Input Data for new node" <<endl;
         cin >> value ;
     node * newNode = new node (value) ;
 
-    while (temp->next != nullptr){
+    while (temp->next != nullptr){ // Will Traverse Till Last
         if (temp->data == nodeToInsAft){
             newNode->next = temp->next ;
             temp -> next = newNode ;
         }
         temp = temp->next;
     }
-    cout << "\nNode inserted in list successfully...\n\n";
+    	cout << "\nNode inserted in list successfully...\n\n";
 }
+
+// Will search the respective key in the linked list
 
 bool searchInLinkedList (node * &Head,int key){
     node * temp = Head ;
@@ -90,10 +92,12 @@ bool searchInLinkedList (node * &Head,int key){
         temp = temp-> next ;
     }
     if(temp->data == key) return true ;
+    // Otherwise 
         return false ;
 
 }
 
+//Will Showcase all nodes in linked list
 
 void display (node * Head){
     node * temp = Head ;
@@ -135,14 +139,14 @@ void deletion (node * head, int value){
     }
 
 // n-1
-    while (temp->next->data != value){
+    while (temp->next->data != value){  // Will give us n-1
         temp = temp -> next ;
     }
 
     node * toDelete = temp->next ; // n
     cout << temp->next->data << " Deleted Successfully !\n\n"<<endl ;
     temp->next = temp->next->next ;  // n+1
-    delete toDelete  ;
+    delete toDelete ;
     delete toDeleteHead ;
 }
 
@@ -174,7 +178,7 @@ void sortingLinkedList (node * &head){
             }
             temp = temp->next;
         }
-        last = temp; // For starting loop again and again  to sort our linked list
+        last = temp; // For starting loop again and again  to sort out our linked list
     } while (flag);
 }
 
@@ -205,6 +209,8 @@ node * midpointFind (node * &head){
     }
    return slow ;
 }
+
+// Merging Two Halves of linked list.
 
 node * mergeLinkedList(node*left , node*right){
 	
@@ -245,12 +251,14 @@ node * mergeLinkedList(node*left , node*right){
 	return dummyNode ;
 }
 
+// Sorting Through Merge Sort
+
 node * mergeSort (node*&head){
 	if (head == nullptr || head->next == nullptr){
 		return head;
 	}
 	
-//	Now to find mide point of a linked List 
+//	Now to find mid point of a linked List 
 
 	node * mid = midpointFind(head) ;
 	
