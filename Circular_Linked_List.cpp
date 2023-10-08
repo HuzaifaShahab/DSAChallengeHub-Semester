@@ -15,7 +15,7 @@ class List {
 void addInHead (List*&Head,int data){
 
  if (Head == nullptr) {
-		List newNode = new List(data) ;
+		List * newNode = new List(data) ;
 		Head = newNode ;
 		return ;
  }
@@ -26,15 +26,15 @@ void addInHead (List*&Head,int data){
 		temp = temp->next ;
 	}
 	
-	List newNode = new List(data) ;
+	List *newNode = new List(data) ;
 	temp->next = newNode ;
-	newNode -> next = head ;
-	head = newNode ; 
+	newNode -> next = Head ;
+	Head = newNode ; 
 }
 
 void insertInTail (List*&Head , int data){
-	if (tail == nullptr){
-		List newNode = new List(data) ;
+	if (Head == nullptr){
+		List* newNode = new List(data) ;
 		Head = newNode ;
 		newNode ->next = Head ;
 		return ;
@@ -51,21 +51,29 @@ void insertInTail (List*&Head , int data){
 		while (temp->next != Head){
 			temp = temp->next ;
 		}
-		List newNode = new List(data) ;
+		List *newNode = new List(data) ;
 		temp->next = newNode ;
 		newNode->next = Head ;
 }
 
-void traverse (List & Head){
+void traverse (List * Head){
 	List * temp ;
 	temp = Head ;
 	
 	do {
 		cout << temp->data << "-->" ;
-		temp++ ;
-	}while (temp!=Head);
+		temp = temp->next ;
+	}while (temp!=nullptr);
 }
 int main (){
 	List * Head = nullptr ;
 	
+	addInHead(Head,89) ;
+	addInHead(Head,97);
+	addInHead(Head,88);
+	traverse (Head) ;
+	
+	insertInTail(Head,77) ;
+	insertInTail(Head,44) ;
+	traverse(Head) ;
 }
