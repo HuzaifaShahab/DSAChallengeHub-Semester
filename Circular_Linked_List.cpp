@@ -43,14 +43,11 @@ void insertInTail (List*&Head , int data){
 	List * temp ;
 	temp = Head ;
 	
-	while (temp->next!=nullptr){
-		temp = temp->next ;
-	}
-	temp->next = Head ;
 
 		while (temp->next != Head){
 			temp = temp->next ;
 		}
+		
 		List *newNode = new List(data) ;
 		temp->next = newNode ;
 		newNode->next = Head ;
@@ -63,17 +60,17 @@ void traverse (List * Head){
 	do {
 		cout << temp->data << "-->" ;
 		temp = temp->next ;
-	}while (temp!=nullptr);
+	}while (temp!=Head);
 }
 int main (){
 	List * Head = nullptr ;
 	
+	insertInTail(Head,77) ;
+	insertInTail(Head,44) ;
+	traverse(Head) ;
+
 	addInHead(Head,89) ;
 	addInHead(Head,97);
 	addInHead(Head,88);
 	traverse (Head) ;
-	
-	insertInTail(Head,77) ;
-	insertInTail(Head,44) ;
-	traverse(Head) ;
 }
