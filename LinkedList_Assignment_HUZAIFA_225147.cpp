@@ -2,10 +2,10 @@
 using namespace std ;
 
 class node {
-public :
+private :
     int data ;
     node * next ;
-
+public : 
     node (int data){  // Parametrized Constructor
         this->data = data ;
         this->next = nullptr ;
