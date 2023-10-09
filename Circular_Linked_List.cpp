@@ -61,6 +61,22 @@ void traverse (List * Head){
 		cout << temp->data << "-->" ;
 		temp = temp->next ;
 	}while (temp!=Head);
+	cout << " null"<<endl ;
+}
+
+void deletion (List*Head , int value){
+	List * temp , * toDelete ;
+	temp = Head ;
+	while (temp->next->data != value){
+		temp = temp->next ;
+	}
+	toDelete = temp->next ;
+	cout << temp->next->data <<"  Deleted Successfully...." << endl;
+	temp->next = temp->next->next ;
+
+
+	delete toDelete ;
+	
 }
 int main (){
 	List * Head = nullptr ;
@@ -68,9 +84,10 @@ int main (){
 	insertInTail(Head,77) ;
 	insertInTail(Head,44) ;
 	traverse(Head) ;
-
+	
 	addInHead(Head,89) ;
 	addInHead(Head,97);
 	addInHead(Head,88);
+	deletion(Head,44) ;
 	traverse (Head) ;
 }
