@@ -35,10 +35,7 @@ private:
 		return array[top] ;
 }
 bool isStackEmpty (){
-
-		if (top == -1) return true ;
-		
-		else  return false ;
+	return top == -1 ;
 	}
 	
 void displayStack (){
@@ -52,8 +49,7 @@ void displayStack (){
 		for (int i=0 ; i<=top ; i++){
 			cout <<" | " <<array[i] << " | " <<endl ;
 			cout << "  ____" <<endl;
-		}
-		
+		}	
 	}
 };
 int main (){
