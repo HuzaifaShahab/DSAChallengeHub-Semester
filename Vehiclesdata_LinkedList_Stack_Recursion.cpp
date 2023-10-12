@@ -99,7 +99,7 @@ int main() {
     VehicleList vehicleList;
 
     // Inserting data into the linked list
-    vehicleList.insert("Toyota", "Camry", 2021);
+    vehicleList.insert("toyota", "Camry", 2021);
     vehicleList.insert("Honda", "Civic", 2022);
     vehicleList.insert("ford", "Mustang", 2020);
 
