@@ -91,7 +91,7 @@ public:
             return;
         }
         displayReverseRecursive(current->next);
-        cout << "Car Name: " << current->carName << " | Car Model: " << current->carModel << " | Manufacturing Year: " << current->carManuYear << endl;
+        cout << "Car Name: " << current->carName << "| Car Model: " << current->carModel << " | Manufacturing Year: " << current->carManuYear << endl;
     }
 };
 
