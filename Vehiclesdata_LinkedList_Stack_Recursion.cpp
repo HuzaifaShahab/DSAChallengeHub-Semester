@@ -101,7 +101,7 @@ int main() {
     // Inserting data into the linked list
     vehicleList.insert("Toyota", "Camry", 2021);
     vehicleList.insert("Honda", "Civic", 2022);
-    vehicleList.insert("Ford", "Mustang", 2020);
+    vehicleList.insert("ford", "Mustang", 2020);
 
     cout << "Displaying Linked List Data:" << endl;
     vehicleList.display();
