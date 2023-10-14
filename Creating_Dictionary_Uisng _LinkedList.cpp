@@ -147,7 +147,7 @@ void insertWordIntoAlphabet(AlphabetNode* currentAlphabet, string word, string m
         }
     }
 
-    // Continue with the logic to insert the word with the repective alphabet
+    // Continue with the logic to insert the word with the repective alphabet.
 
     WordNode* newWord = new WordNode;
     newWord->word = word;
