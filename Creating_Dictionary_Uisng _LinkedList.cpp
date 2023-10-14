@@ -27,16 +27,18 @@ public:
     // Constructor to initialize the dictionary
     Dictionary() {
         head = nullptr;
+        
     }
 
     // Function to insert a word into the dictionary
     void insertWord(string word, string meaning) {
         // Convert the word to lowercase for case-insensitive comparison
-        transform(word.begin(), word.end(), word.begin(), ::tolower);
+        transform(word.begin(), word.end(), word.begin(), ::tolower); // Change to lower Case
 
         char firstChar = word[0];
-        AlphabetNode* currentAlphabet = findAlphabetNode(firstChar);
+        AlphabetNode* currentAlphabet = findAlphabetNode(firstChar); // Will find you the node to insert
 
++
         // If the alphabet node doesn't exist, create a new one
         if (!currentAlphabet) {
             currentAlphabet = createAlphabetNode(firstChar);
@@ -145,7 +147,7 @@ int main() {
     // Insert some sample data
     dictionary.insertWord("apple", "A fruit");
     dictionary.insertWord("apple","A Company");
-    dictionary.insertWord("Zebra","An Animal") ;
+    dictionary.insertWord("Zebra","An Animal") ;-
     dictionary.insertWord("banana", "An elongated, edible fruit");
     dictionary.insertWord("cat", "A small domesticated carnivorous mammal");
     dictionary.insertWord("dog", "A domesticated carnivorous mammal");
