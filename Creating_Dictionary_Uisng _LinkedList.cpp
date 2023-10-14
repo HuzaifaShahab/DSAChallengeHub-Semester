@@ -38,7 +38,7 @@ public:
         char firstChar = word[0];
         AlphabetNode* currentAlphabet = findAlphabetNode(firstChar); // Will find you the node to insert
 
-+
+
         // If the alphabet node doesn't exist, create a new one
         if (!currentAlphabet) {
             currentAlphabet = createAlphabetNode(firstChar);
@@ -76,7 +76,6 @@ private:
             if (currentAlphabet->alphabet == alphabet) {
                 return currentAlphabet;
             }
-
             currentAlphabet = currentAlphabet->nextAlphabet;
         }
 
@@ -109,48 +108,86 @@ private:
                 currentAlphabet = currentAlphabet->nextAlphabet;
             }
 
-            // Insert at the correct position
+            // Insert at the end of the list
             newAlphabet->nextAlphabet = currentAlphabet->nextAlphabet;
             currentAlphabet->nextAlphabet = newAlphabet;
         }
     }
 
     // Function to insert a word node into the linked list of words for a given alphabet
-    void insertWordIntoAlphabet(AlphabetNode* currentAlphabet, string word, string meaning) {
-        WordNode* newWord = new WordNode;
-        newWord->word = word;
-        newWord->meaning = meaning;
-        newWord->nextWord = nullptr;
+   void insertWordIntoAlphabet(AlphabetNode* currentAlphabet, string word, string meaning) {
+    // Check if the word already exists in the dictionary
+    bool wordExists = false;
+    WordNode* existingWord = nullptr;
 
-        if (!currentAlphabet->nextWord || currentAlphabet->nextWord->word > word) {
-            // Insert at the beginning of the list
-            newWord->nextWord = currentAlphabet->nextWord;
-            currentAlphabet->nextWord = newWord;
-        } else {
-            WordNode* currentWord = currentAlphabet->nextWord;
+    while (currentAlphabet->nextWord) {
+        if (currentAlphabet->nextWord->word == word) {
+            // Word already exists
+            wordExists = true;
+            existingWord = currentAlphabet->nextWord;
+            break;
+        }
+        currentAlphabet = currentAlphabet->nextWord;
+    }
 
-            while (currentWord->nextWord && currentWord->nextWord->word < word) {
-                currentWord = currentWord->nextWord;
-            }
+    // Ask the user if they want to add the word
+    if (wordExists) {
+        cout << "Word already exists in the dictionary:\n";
+        cout << existingWord->word << ": " << existingWord->meaning << "\n";
+        cout << "Do you want to add this word again? (y/n): ";
 
-            // Insert at the correct position
-            newWord->nextWord = currentWord->nextWord;
-            currentWord->nextWord = newWord;
+        char choice;
+        cin >> choice;
+
+        if (choice != 'y' && choice != 'Y') {
+            // User does not want to add the word, return without adding
+            cout << "Word not added.\n";
+            return;
         }
     }
+
+    // Continue with the original logic to insert the word
+
+    WordNode* newWord = new WordNode;
+    newWord->word = word;
+    newWord->meaning = meaning;
+    newWord->nextWord = nullptr;
+
+    if (!currentAlphabet->nextWord || currentAlphabet->nextWord->word > word) {
+        // Insert at the beginning of the list
+        newWord->nextWord = currentAlphabet->nextWord;
+        currentAlphabet->nextWord = newWord;
+    } else {
+        WordNode* currentWord = currentAlphabet->nextWord;
+
+        // Insert at the end of the list or at the correct position
+        while (currentWord->nextWord && currentWord->nextWord->word < word) {
+            currentWord = currentWord->nextWord;
+        }
+
+        // Insert at the correct position
+        newWord->nextWord = currentWord->nextWord;
+        currentWord->nextWord = newWord;
+    }
+
+    cout << "Word added successfully.\n";
+}
 };
 
 int main() {
     // Create a dictionary
     Dictionary dictionary;
 
+   
     // Insert some sample data
-    dictionary.insertWord("apple", "A fruit");
-    dictionary.insertWord("apple","A Company");
-    dictionary.insertWord("Zebra","An Animal") ;-
+
+    dictionary.insertWord("Zebra","An Animal") ;
+     dictionary.insertWord("apple", "A fruit");
+    dictionary.insertWord("age","A Company");
     dictionary.insertWord("banana", "An elongated, edible fruit");
     dictionary.insertWord("cat", "A small domesticated carnivorous mammal");
     dictionary.insertWord("dog", "A domesticated carnivorous mammal");
+    dictionary.insertWord("Huzaifa","Name of a person") ;
 
     // Display the dictionary
     dictionary.displayDictionary();
