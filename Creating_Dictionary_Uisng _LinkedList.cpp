@@ -115,9 +115,10 @@ private:
     }
 
     // Function to insert a word node into the linked list of words for a given alphabet
-   void insertWordIntoAlphabet(AlphabetNode* currentAlphabet, string word, string meaning) {
+   
+void insertWordIntoAlphabet(AlphabetNode* currentAlphabet, string word, string meaning) {
     // Checking if  word already in the dictionary
-    bool wordHe = false;
+    bool wordHe = false;  // Flag
     WordNode* heWord = nullptr;
 
     while (currentAlphabet->nextWord) { // Will out , When get nullptr.
@@ -140,13 +141,13 @@ private:
         char choice;
         cin >> choice;
 
-        if (choice != 'y' && choice != 'Y') {
+        if (choice == 'n' && choice == 'N') {
             cout << "Word'nt added.\n";
-            return;
+            return;    // Will return from this method.
         }
     }
 
-    // Continue with the original logic to insert the word
+    // Continue with the logic to insert the word with the repective alphabet
 
     WordNode* newWord = new WordNode;
     newWord->word = word;
