@@ -120,17 +120,19 @@ void insertWordIntoAlphabet(AlphabetNode* currentAlphabet, string word, string m
     // Checking if  word already in the dictionary
     bool wordHe = false;  // Flag
     WordNode* heWord = nullptr;
+    
+    WordNode * current = currentAlphabet->nextWord ;
 
-    while (currentAlphabet->nextWord) { // Will out , When get nullptr.
+    while (current) { // Will out , When get nullptr.
       
-	    if (currentAlphabet->nextWord->word == word) {
+	    if (current->word == word) {
             // Word already exists
             wordHe = true;
-            heWord = currentAlphabet->nextWord;
+            heWord = current;
             break;
         }
       
-	    currentAlphabet = currentAlphabet->nextWord;
+	    current = current->nextWord;
     }
 
     if (wordHe) {
@@ -144,7 +146,7 @@ void insertWordIntoAlphabet(AlphabetNode* currentAlphabet, string word, string m
         if (choice == 'n' && choice == 'N') {
             cout << "Word'nt added.\n";
             return;    // Will return from this method.
-        }
+        }else  cout << "Word added successfully.\n";
     }
 
     // Continue with the logic to insert the word with the repective alphabet.
@@ -169,12 +171,9 @@ void insertWordIntoAlphabet(AlphabetNode* currentAlphabet, string word, string m
         // Insert at the correct position
         newWord->nextWord = currentWord->nextWord;
         currentWord->nextWord = newWord;
-    }
-
-    cout << "Word added successfully.\n";
+    }   
 }
 };
-
 int main() {
     // Create a dictionary
     Dictionary dictionary;
@@ -182,6 +181,7 @@ int main() {
    
     // Insert some sample data
 
+    dictionary.insertWord("Zebra","Ye chuttu he") ;
     dictionary.insertWord("Zebra","Ye chuttu he") ;
      dictionary.insertWord("apple", "Ye Muje pxnd nhi");
     dictionary.insertWord("age","19.5 he");
