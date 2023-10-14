@@ -181,12 +181,12 @@ int main() {
    
     // Insert some sample data
 
-    dictionary.insertWord("Zebra","An Animal") ;
-     dictionary.insertWord("apple", "A fruit");
-    dictionary.insertWord("age","A Company");
-    dictionary.insertWord("banana", "An elongated, edible fruit");
-    dictionary.insertWord("cat", "A small domesticated carnivorous mammal");
-    dictionary.insertWord("dog", "A domesticated carnivorous mammal");
+    dictionary.insertWord("Zebra","Ye chuttu he") ;
+     dictionary.insertWord("apple", "Ye Muje pxnd nhi");
+    dictionary.insertWord("age","19.5 he");
+    dictionary.insertWord("banana", "hamza khan kela");
+    dictionary.insertWord("cat", "aksa..r");
+    dictionary.insertWord("dog", "barking");
     dictionary.insertWord("Huzaifa","Name of a person") ;
 
     // Display the dictionary
