@@ -116,32 +116,32 @@ private:
 
     // Function to insert a word node into the linked list of words for a given alphabet
    void insertWordIntoAlphabet(AlphabetNode* currentAlphabet, string word, string meaning) {
-    // Check if the word already exists in the dictionary
-    bool wordExists = false;
-    WordNode* existingWord = nullptr;
+    // Checking if  word already in the dictionary
+    bool wordHe = false;
+    WordNode* heWord = nullptr;
 
-    while (currentAlphabet->nextWord) {
-        if (currentAlphabet->nextWord->word == word) {
+    while (currentAlphabet->nextWord) { // Will out , When get nullptr.
+      
+	    if (currentAlphabet->nextWord->word == word) {
             // Word already exists
-            wordExists = true;
-            existingWord = currentAlphabet->nextWord;
+            wordHe = true;
+            heWord = currentAlphabet->nextWord;
             break;
         }
-        currentAlphabet = currentAlphabet->nextWord;
+      
+	    currentAlphabet = currentAlphabet->nextWord;
     }
 
-    // Ask the user if they want to add the word
-    if (wordExists) {
-        cout << "Word already exists in the dictionary:\n";
-        cout << existingWord->word << ": " << existingWord->meaning << "\n";
-        cout << "Do you want to add this word again? (y/n): ";
+    if (wordHe) {
+        cout << "Word already exists in the dictionary :\n";
+        cout << heWord->word << ": " << heWord->meaning << "\n";
+        cout << "Do you want to add this word again in dictionary? (y/n): ";
 
         char choice;
         cin >> choice;
 
         if (choice != 'y' && choice != 'Y') {
-            // User does not want to add the word, return without adding
-            cout << "Word not added.\n";
+            cout << "Word'nt added.\n";
             return;
         }
     }
