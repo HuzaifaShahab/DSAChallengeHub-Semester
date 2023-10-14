@@ -33,7 +33,7 @@ public:
     // Function to insert a word into the dictionary
     void insertWord(string word, string meaning) {
         // Convert the word to lowercase for case-insensitive comparison
-        transform(word.begin(), word.end(), word.begin(), ::tolower); // Change to lower Case
+        transform(word.begin(), word.end(), word.begin(), ::tolower); // Converting word to lower Case
 
         char firstChar = word[0];
         AlphabetNode* currentAlphabet = findAlphabetNode(firstChar); // Will find you the node to insert
@@ -178,9 +178,7 @@ int main() {
     // Create a dictionary
     Dictionary dictionary;
 
-   
     // Insert some sample data
-
     dictionary.insertWord("Zebra","Ye chuttu he") ;
     dictionary.insertWord("Zebra","Ye chuttu he") ;
      dictionary.insertWord("apple", "Ye Muje pxnd nhi");
@@ -188,7 +186,7 @@ int main() {
     dictionary.insertWord("banana", "hamza khan kela");
     dictionary.insertWord("cat", "aksa..r");
     dictionary.insertWord("dog", "barking");
-    dictionary.insertWord("Huzaifa","Name of a person") ;
+    dictionary.insertWord("Huzaifa","GDSC EM t+member") ;
 
     // Display the dictionary
     dictionary.displayDictionary();
