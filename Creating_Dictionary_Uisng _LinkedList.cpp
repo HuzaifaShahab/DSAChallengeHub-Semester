@@ -22,8 +22,7 @@ struct AlphabetNode {
 class SingleNode {
 	private : 
 	SingleNode * Head = nullptr;
-	string word ;
-	string meaning ;
+	string word , meaning ;
 	SingleNode * next ;
 	public :
 		SingleNode (){	
