@@ -177,25 +177,33 @@ void insertWordIntoAlphabet(AlphabetNode* currentAlphabet, string word, string m
     }
 
 void searchForWord(string key) {
-    AlphabetNode* currentAlphabet = head;
-    while (currentAlphabet) {
-        WordNode* currentWord = currentAlphabet->nextWord;
-        while (currentWord) {
+	transform(key.begin(),key.end(),key.begin(),::tolower); // Convert word to lowercase
+
+    char firstChar = key[0] ;
+
+    AlphabetNode* currentAlphabet = findAlphabetNode(firstChar) ;
+    
+    WordNode * currentWord = currentAlphabet->nextWord ;
+    
+   if (!currentAlphabet) {
+        cout << "The word with the first alphabet isn't in the Dictionary" << "\n" ;
+        return;
+    }
+    
+    while (currentWord) {	
             if (currentWord->word == key) {
                 cout << "The Word is in the dictionary: " << key << "\n";
                 return;
             }
-            if (!currentWord->nextWord) {  // if last word is in list or not
+            if (!currentWord->nextWord) {  // If last word is in list or not.
                 if (currentWord->word == key) {
                     cout << "The Word is in the dictionary: " << key << "\n";
                     return;
                 }
             }
-            currentWord = currentWord->nextWord;
+            currentWord = currentWord->nextWord ;
         }
-        currentAlphabet = currentAlphabet->nextAlphabet;
-    }
-    cout << "The Word is not in the dictionary: " <<key<< "\n";
+        cout << "Word : " <<currentWord->word<<" is'nt in the dictionary."<<"\n" ;
 }
 
 void deletionInWord(string word) {
@@ -220,7 +228,7 @@ void deletionInWord(string word) {
         currentWord = currentWord->nextWord;
     }
     
-// If word == noAddress -> Not excist
+// If word == noAddress -> Not exist
 
     if (currentWord==nullptr) { 
         cout << "Word not found in the Dictionary: " << word << "\n";
@@ -233,28 +241,29 @@ void deletionInWord(string word) {
     cin >> pick;
 
     if (pick == 'y' || pick == 'Y') {
+
 // This validation is for , when you have only one word for the respective Alphabet.        
-        if (prevPosition == nullptr) {  
-            
-            currentAlphabet->nextWord = currentWord->nextWord;
-        } else {
-            prevPosition->nextWord = currentWord->nextWord;
-        }
+       
+	    if (prevPosition == nullptr)   currentAlphabet->nextWord = currentWord->nextWord;
+       
+	    else prevPosition->nextWord = currentWord->nextWord;
+        
 
         cout << "Word '" << word << "' deleted successfully.\n";
         
-		delete currentWord();
+		delete (currentWord);
     } 
-	else cout << "You Don't want to delete, Right!'\n";
-    
+	
+	else cout << "You Don't want to delete, Right!'\n";  
 }
+
 };
 
 int main() {
     // Create a dictionary
     Dictionary dictionary;
 
-    // Insert some sample data
+    
     dictionary.insertWord("Zebra","Ye chuttu he") ;
     dictionary.insertWord("Zebra","Ye chuttu he") ;
     dictionary.insertWord("age","19.5 he");
