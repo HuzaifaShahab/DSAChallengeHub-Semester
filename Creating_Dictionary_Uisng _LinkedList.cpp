@@ -219,6 +219,8 @@ void deletionInWord(string word) {
         prevWord = currentWord;
         currentWord = currentWord->nextWord;
     }
+    
+// If word == noAddress -> Not excist
 
     if (currentWord==nullptr) { 
         cout << "Word not found in the Dictionary: " << word << "\n";
