@@ -262,6 +262,7 @@ void searchForWord(string key) {
         cout << "Word : " <<currentWord->word<<" is'nt in the dictionary."<<"\n" ;
 }
 
+
 void deletionInWord(string word) {
     
 	transform(word.begin(),word.end(),word.begin(),::tolower); // Convert word to lowercase
