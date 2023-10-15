@@ -26,8 +26,7 @@ private:
 public:
     // Constructor to initialize the dictionary
     Dictionary() {
-        head = nullptr;
-        
+        head = nullptr;    
     }
 
     // Function to insert a word into the dictionary
@@ -36,7 +35,7 @@ public:
         transform(word.begin(),word.end(),word.begin(),::tolower); //Converting word to lower Case
 
         char firstChar = word[0] ;
-        AlphabetNode* currentAlphabet = findAlphabetNode(firstChar); //Will find you the node to insert
+        AlphabetNode* currentAlphabet = findCorrectAlphabet(firstChar); //Will find you the node to insert
 
 
         // If the alphabet node doesn't exist, create a new one
@@ -181,7 +180,7 @@ void searchForWord(string key) {
 
     char firstChar = key[0] ;
 
-    AlphabetNode* currentAlphabet = findAlphabetNode(firstChar) ;
+    AlphabetNode* currentAlphabet = findCorrectAlphabet(firstChar) ;
     
     WordNode * currentWord = currentAlphabet->nextWord ;
     
@@ -212,7 +211,7 @@ void deletionInWord(string word) {
 
     char firstChar = word[0];
 
-    AlphabetNode* currentAlphabet = findAlphabetNode(firstChar) ;
+    AlphabetNode* currentAlphabet = findCorrectAlphabet(firstChar) ;
 
     if (!currentAlphabet) {
         cout << "The word with the first alphabet isn't in the Dictionary" << "\n" ;
