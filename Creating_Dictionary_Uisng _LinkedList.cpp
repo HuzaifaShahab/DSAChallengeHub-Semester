@@ -48,26 +48,9 @@ public:
         insertWordIntoAlphabet(currentAlphabet, word, meaning);
     }
 
-    // Function to display the entire dictionary
-    void displayDictionary() {
-        AlphabetNode* currentAlphabet = head;
+  
 
-        while (currentAlphabet) {
-            cout << "Words starting with '" << currentAlphabet->alphabet << "':\n";
-
-            WordNode* currentWord = currentAlphabet->nextWord;
-
-            while (currentWord) {
-                cout << currentWord->word << ": " << currentWord->meaning << "\n";
-                currentWord = currentWord->nextWord;
-            }
-
-            cout << "\n";
-            currentAlphabet = currentAlphabet->nextAlphabet;
-        }
-    }
-
-private:
+public:
     // Function to find an alphabet node with the given character
     AlphabetNode* findAlphabetNode(char alphabet) {
         AlphabetNode* currentAlphabet = head;
@@ -173,6 +156,51 @@ void insertWordIntoAlphabet(AlphabetNode* currentAlphabet, string word, string m
         currentWord->nextWord = newWord;
     }   
 }
+
+  // Function to display the entire dictionary
+    void displayDictionary() {
+        AlphabetNode* currentAlphabet = head;
+
+        while (currentAlphabet) {
+            cout << "Words starting with '" << currentAlphabet->alphabet << "':\n";
+
+            WordNode* currentWord = currentAlphabet->nextWord;
+
+            while (currentWord) {
+                cout << currentWord->word << ": " << currentWord->meaning << "\n";
+                currentWord = currentWord->nextWord;
+            }
+
+            cout << "\n";
+            currentAlphabet = currentAlphabet->nextAlphabet;
+        }
+    }
+
+void searchForWord(string key) {
+    AlphabetNode* currentAlphabet = head;
+    while (currentAlphabet) {
+        WordNode* currentWord = currentAlphabet->nextWord;
+        while (currentWord) {
+            if (currentWord->word == key) {
+                cout << "The Word is in the dictionary: " << key << "\n";
+                return;
+            }
+            if (!currentWord->nextWord) {  // if last word is in list or not
+                if (currentWord->word == key) {
+                    cout << "The Word is in the dictionary: " << key << "\n";
+                    return;
+                }
+            }
+            currentWord = currentWord->nextWord;
+        }
+        currentAlphabet = currentAlphabet->nextAlphabet;
+    }
+    cout << "The Word is not in the dictionary: " <<key<< "\n";
+}
+
+void deletionInWord (String word){
+	
+}
 };
 int main() {
     // Create a dictionary
@@ -181,13 +209,12 @@ int main() {
     // Insert some sample data
     dictionary.insertWord("Zebra","Ye chuttu he") ;
     dictionary.insertWord("Zebra","Ye chuttu he") ;
-     dictionary.insertWord("apple", "Ye Muje pxnd nhi");
     dictionary.insertWord("age","19.5 he");
     dictionary.insertWord("banana", "hamza khan kela");
     dictionary.insertWord("cat", "aksa..r");
     dictionary.insertWord("dog", "barking");
-    dictionary.insertWord("Huzaifa","GDSC EM t+member") ;
-
+    dictionary.insertWord("apple", "Ye Muje pxnd nhi");
+	dictionary.searchForWord("apple") ;
     // Display the dictionary
     dictionary.displayDictionary();
 
