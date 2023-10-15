@@ -212,11 +212,11 @@ void deletionInWord(string word) {
     }
 
     WordNode* currentWord = currentAlphabet->nextWord;
-    WordNode* prevWord = nullptr;
+    WordNode* prevPosition = nullptr;
 
     // Using previous to get n-1 node -> to delete the n node
     while (currentWord && currentWord->word != word) {
-        prevWord = currentWord;
+        prevPosition = currentWord;
         currentWord = currentWord->nextWord;
     }
     
@@ -227,25 +227,26 @@ void deletionInWord(string word) {
         return;
     }
 
-    // Display a warning and get user approval
-    cout << "Are you sure you want to delete the word '" << word << "' from Dictionary? (yes/no): ";
+    // Displaying warning 
+    cout << "Are you sure you want to delete the word | " << word << " | from Dictionary? (yes/no): ";
     char pick;
     cin >> pick;
 
     if (pick == 'y' || pick == 'Y') {
-        // Delete the word
-        if (!prevWord) {
-            // If the word to delete is the first node
+// This validation is for , when you have only one word for the respective Alphabet.        
+        if (prevPosition == nullptr) {  
+            
             currentAlphabet->nextWord = currentWord->nextWord;
         } else {
-            prevWord->nextWord = currentWord->nextWord;
+            prevPosition->nextWord = currentWord->nextWord;
         }
 
         cout << "Word '" << word << "' deleted successfully.\n";
-        delete currentWord;
-    } else {
-        cout << "Deletion canceled.\n";
-    }
+        
+		delete currentWord();
+    } 
+	else cout << "You Don't want to delete, Right!'\n";
+    
 }
 };
 
