@@ -18,6 +18,37 @@ struct AlphabetNode {
     AlphabetNode* nextAlphabet; // Pointer to the next alphabet node
 };
 
+// Class to push the words & Meanings to Single Linked list class 
+class SingleNode {
+	private : 
+	SingleNode * Head = nullptr;
+	string word ;
+	string meaning ;
+	SingleNode * next ;
+	public :
+		SingleNode (){	
+			next = nullptr ;
+		}
+		
+		void insertInSingleLinkedList (string word , string meaning){
+			
+			SingleNode * newNode = new SingleNode() ;
+			newNode->word = word ;
+			newNode->meaning = meaning ;
+			newNode -> next = Head ;
+			Head = newNode ;
+		}
+		
+		void displayLinkedList (){
+			cout << "Word & their meanings in a single linked list" <<"\n" ;
+			SingleNode * currentNode = Head ;
+			while (currentNode){
+				cout << currentNode->word <<" : " <<currentNode->meaning << "\n\n" ;
+				currentNode = currentNode->next ;
+			}
+		}
+};
+
 class Stack {
 private:
     WordNode* top;
@@ -56,26 +87,26 @@ public:
         return top == nullptr;
     }
 
-    void displayStack() {
+    void displayStack(SingleNode & sl) {
     	
         WordNode* currentWord = top;
 		if (!top) cout << "Stack is empty" <<"\n" ;
 		else {
 	        while (currentWord) {
 	            cout << currentWord->word << ": " << currentWord->meaning << "\n";
+	             sl.insertInSingleLinkedList(currentWord->word, currentWord->meaning) ;
 	            currentWord = currentWord->nextWord;
 	        }
 	    }
 }
 };
 
+
 // Class to represent the dictionary
 class Dictionary {
 public:
     AlphabetNode* head; // Pointer to the head of the dictionary - > Will be null at start
-
-
-
+    
     // Constructor to initialize the dictionary
     Dictionary() {
         head = nullptr;    
@@ -216,13 +247,14 @@ void insertWordIntoAlphabet(AlphabetNode* currentAlphabet, string word, string m
     while (currentAlphabet) {
         cout << "Words starting with '" << currentAlphabet->alphabet << "':\n";
 
-        WordNode* currentWord = currentAlphabet->nextWord;
+        WordNode* currentWord = currentAlphabet->nextWord ;
 
         while (currentWord) {
             cout << currentWord->word << ": " << currentWord->meaning << "\n";
 
             // Add a call to push the word and meaning onto the stack
             st.push(currentWord->word, currentWord->meaning);
+           
 
             currentWord = currentWord->nextWord;
         }
@@ -336,14 +368,13 @@ void displayThroughRecursion (AlphabetNode * currentAlphabet){
 };
 
 
+
 int main() {
     // Create a dictionary
     Dictionary dictionary;
+    SingleNode sl ;
 	Stack st ;
     
-    dictionary.insertWordInDictionary("Zebra","Ye chuttu he") ;
-    dictionary.insertWordInDictionary("Zebra","Ye chuttu he") ;
-    dictionary.insertWordInDictionary("age","19.5 he");
     dictionary.insertWordInDictionary("banana", "hamza khan kela");
     dictionary.insertWordInDictionary("cat", "aksa..r");
     dictionary.insertWordInDictionary("dog", "barking");
@@ -356,8 +387,10 @@ int main() {
     dictionary.displayDictionary(st) ;
     cout <<"\n\n" ;
     cout << "Displaying Elements At Stack" <<"\n" ;
-    st.displayStack() ;
-    
+    st.displayStack(sl) ;
+    cout << "Words in single linked list" << endl ;
+    sl.displayLinkedList() ;
+    cout << "------------------------------" << endl;
     dictionary.displayThroughRecursion(dictionary.head) ;
 
     return 0;
