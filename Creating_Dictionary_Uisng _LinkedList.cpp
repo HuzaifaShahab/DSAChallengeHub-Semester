@@ -33,10 +33,10 @@ public:
     // Function to insert a word into the dictionary
     void insertWord(string word, string meaning) {
         // Convert the word to lowercase for case-insensitive comparison
-        transform(word.begin(), word.end(), word.begin(), ::tolower); // Converting word to lower Case
+        transform(word.begin(),word.end(),word.begin(),::tolower); //Converting word to lower Case
 
-        char firstChar = word[0];
-        AlphabetNode* currentAlphabet = findAlphabetNode(firstChar); // Will find you the node to insert
+        char firstChar = word[0] ;
+        AlphabetNode* currentAlphabet = findAlphabetNode(firstChar); //Will find you the node to insert
 
 
         // If the alphabet node doesn't exist, create a new one
@@ -198,10 +198,54 @@ void searchForWord(string key) {
     cout << "The Word is not in the dictionary: " <<key<< "\n";
 }
 
-void deletionInWord (String word){
-	
+void deletionInWord(string word) {
+    transform(word.begin(), word.end(), word.begin(), ::tolower); // Convert word to lowercase
+
+    char firstChar = word[0];
+
+    AlphabetNode* currentAlphabet = findAlphabetNode(firstChar);
+
+    if (!currentAlphabet) {
+        cout << "This word isn't in the Dictionary" << "\n";
+        return;
+    }
+
+    WordNode* currentWord = currentAlphabet->nextWord;
+    WordNode* prevWord = nullptr;
+
+    // Find the word to delete and keep track of the previous node
+    while (currentWord && currentWord->word != word) {
+        prevWord = currentWord;
+        currentWord = currentWord->nextWord;
+    }
+
+    if (!currentWord) {
+        cout << "Word not found in the Dictionary: " << word << "\n";
+        return;
+    }
+
+    // Display a warning and get user approval
+    cout << "Are you sure you want to delete the word '" << word << "' from the dictionary? (y/n): ";
+    char choice;
+    cin >> choice;
+
+    if (choice == 'y' || choice == 'Y') {
+        // Delete the word
+        if (!prevWord) {
+            // If the word to delete is the first node
+            currentAlphabet->nextWord = currentWord->nextWord;
+        } else {
+            prevWord->nextWord = currentWord->nextWord;
+        }
+
+        cout << "Word '" << word << "' deleted successfully.\n";
+        delete currentWord;
+    } else {
+        cout << "Deletion canceled.\n";
+    }
 }
 };
+
 int main() {
     // Create a dictionary
     Dictionary dictionary;
@@ -214,7 +258,10 @@ int main() {
     dictionary.insertWord("cat", "aksa..r");
     dictionary.insertWord("dog", "barking");
     dictionary.insertWord("apple", "Ye Muje pxnd nhi");
+    dictionary.insertWord("age", "Ye Muje pxnd nhi");
+	dictionary.insertWord("ace", "Ye Muje pxnd nhi");    
 	dictionary.searchForWord("apple") ;
+	dictionary.deletionInWord("apple") ;
     // Display the dictionary
     dictionary.displayDictionary();
 
