@@ -199,14 +199,15 @@ void searchForWord(string key) {
 }
 
 void deletionInWord(string word) {
-    transform(word.begin(), word.end(), word.begin(), ::tolower); // Convert word to lowercase
+    
+	transform(word.begin(),word.end(),word.begin(),::tolower); // Convert word to lowercase
 
     char firstChar = word[0];
 
-    AlphabetNode* currentAlphabet = findAlphabetNode(firstChar);
+    AlphabetNode* currentAlphabet = findAlphabetNode(firstChar) ;
 
     if (!currentAlphabet) {
-        cout << "This word isn't in the Dictionary" << "\n";
+        cout << "This word with the first alphabet isn't in the Dictionary" << "\n" ;
         return;
     }
 
