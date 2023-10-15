@@ -121,12 +121,12 @@ void insertWordIntoAlphabet(AlphabetNode* currentAlphabet, string word, string m
     if (wordHe) {
         cout << "Word already exists in the dictionary :\n";
         cout << heWord->word << ": " << heWord->meaning << "\n";
-        cout << "Do you want to add this word again in dictionary? (y/n): ";
+        cout << "Do you want to add this word again in dictionary? (yes/no): ";
 
-        char choice;
-        cin >> choice;
+        char pick;
+        cin >> pick;
 
-        if (choice == 'n' && choice == 'N') {
+        if (pick == 'n' || pick == 'N') {
             cout << "Word'nt added.\n";
             return;    // Will return from this method.
         }else  cout << "Word added successfully.\n";
@@ -207,30 +207,30 @@ void deletionInWord(string word) {
     AlphabetNode* currentAlphabet = findAlphabetNode(firstChar) ;
 
     if (!currentAlphabet) {
-        cout << "This word with the first alphabet isn't in the Dictionary" << "\n" ;
+        cout << "The word with the first alphabet isn't in the Dictionary" << "\n" ;
         return;
     }
 
     WordNode* currentWord = currentAlphabet->nextWord;
     WordNode* prevWord = nullptr;
 
-    // Find the word to delete and keep track of the previous node
+    // Using previous to get n-1 node -> to delete the n node
     while (currentWord && currentWord->word != word) {
         prevWord = currentWord;
         currentWord = currentWord->nextWord;
     }
 
-    if (!currentWord) {
+    if (currentWord==nullptr) {
         cout << "Word not found in the Dictionary: " << word << "\n";
         return;
     }
 
     // Display a warning and get user approval
-    cout << "Are you sure you want to delete the word '" << word << "' from the dictionary? (y/n): ";
-    char choice;
-    cin >> choice;
+    cout << "Are you sure you want to delete the word '" << word << "' from Dictionary? (yes/no): ";
+    char pick;
+    cin >> pick;
 
-    if (choice == 'y' || choice == 'Y') {
+    if (pick == 'y' || pick == 'Y') {
         // Delete the word
         if (!prevWord) {
             // If the word to delete is the first node
