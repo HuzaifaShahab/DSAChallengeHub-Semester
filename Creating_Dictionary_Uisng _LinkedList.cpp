@@ -220,7 +220,7 @@ void deletionInWord(string word) {
         currentWord = currentWord->nextWord;
     }
 
-    if (currentWord==nullptr) {
+    if (currentWord==nullptr) { 
         cout << "Word not found in the Dictionary: " << word << "\n";
         return;
     }
