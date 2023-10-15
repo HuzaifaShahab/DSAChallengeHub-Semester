@@ -18,12 +18,64 @@ struct AlphabetNode {
     AlphabetNode* nextAlphabet; // Pointer to the next alphabet node
 };
 
-// Class to represent the dictionary
-class Dictionary {
+class Stack {
 private:
-    AlphabetNode* head; // Pointer to the head of the dictionary - > Will be null at start
+    WordNode* top;
 
 public:
+    Stack() : top(nullptr) {}
+
+    void push(string word, string meaning) {
+        WordNode* newWord = new WordNode;
+        newWord->word = word;
+        newWord->meaning = meaning;
+
+        if (!top) {
+            top = newWord;
+        } else {
+            newWord->nextWord = top;
+            top = newWord;
+        }
+    }
+
+    void pop() {
+        if (!isStackEmpty()) {
+            WordNode* toDelete = top;
+            top = top->nextWord;
+            delete toDelete;
+        } else {
+            cout << "Stack is Empty" << "\n";
+        }
+    }
+
+    WordNode* peek() {
+        return top;
+    }
+
+    bool isStackEmpty() {
+        return top == nullptr;
+    }
+
+    void displayStack() {
+    	
+        WordNode* currentWord = top;
+		if (!top) cout << "Stack is empty" <<"\n" ;
+		else {
+	        while (currentWord) {
+	            cout << currentWord->word << ": " << currentWord->meaning << "\n";
+	            currentWord = currentWord->nextWord;
+	        }
+	    }
+}
+};
+
+// Class to represent the dictionary
+class Dictionary {
+public:
+    AlphabetNode* head; // Pointer to the head of the dictionary - > Will be null at start
+
+
+
     // Constructor to initialize the dictionary
     Dictionary() {
         head = nullptr;    
@@ -31,7 +83,7 @@ public:
 
     // Function to insert a word into the dictionary
     void insertWordInDictionary(string word, string meaning) {
-        // Convert the word to lowercase for case-insensitive comparison
+        // Convert the word to lowercase for case using algorithm library
         transform(word.begin(),word.end(),word.begin(),::tolower); //Converting word to lower Case
 
         char firstChar = word[0] ;
@@ -51,7 +103,7 @@ public:
 
 public:
     // Function to find an alphabet node with the given character
-    AlphabetNode* findAlphabetNode(char alphabet) {
+    AlphabetNode* findCorrectAlphabet(char alphabet) {
         AlphabetNode* currentAlphabet = head;
 
         while (currentAlphabet) {
@@ -157,23 +209,28 @@ void insertWordIntoAlphabet(AlphabetNode* currentAlphabet, string word, string m
 }
 
   // Function to display the entire dictionary
-    void displayDictionary() {
-        AlphabetNode* currentAlphabet = head;
+   void displayDictionary(Stack & st) {
+   	
+    AlphabetNode* currentAlphabet = head;
 
-        while (currentAlphabet) {
-            cout << "Words starting with '" << currentAlphabet->alphabet << "':\n";
+    while (currentAlphabet) {
+        cout << "Words starting with '" << currentAlphabet->alphabet << "':\n";
 
-            WordNode* currentWord = currentAlphabet->nextWord;
+        WordNode* currentWord = currentAlphabet->nextWord;
 
-            while (currentWord) {
-                cout << currentWord->word << ": " << currentWord->meaning << "\n";
-                currentWord = currentWord->nextWord;
-            }
+        while (currentWord) {
+            cout << currentWord->word << ": " << currentWord->meaning << "\n";
 
-            cout << "\n";
-            currentAlphabet = currentAlphabet->nextAlphabet;
+            // Add a call to push the word and meaning onto the stack
+            st.push(currentWord->word, currentWord->meaning);
+
+            currentWord = currentWord->nextWord;
         }
+
+        cout << "\n";
+        currentAlphabet = currentAlphabet->nextAlphabet;
     }
+}
 
 void searchForWord(string key) {
 	transform(key.begin(),key.end(),key.begin(),::tolower); // Convert word to lowercase
@@ -256,12 +313,32 @@ void deletionInWord(string word) {
 	else cout << "You Don't want to delete, Right!'\n";  
 }
 
+void displayThroughRecursion (AlphabetNode * currentAlphabet){
+	
+	if (!currentAlphabet) {
+		return ;
+	}
+	
+// Recursive Call's
+	displayThroughRecursion(currentAlphabet->nextAlphabet) ;
+	
+		cout << "Alphabet is : '" <<currentAlphabet->alphabet<< "'" <<"\n" ;
+	
+	WordNode * currentWord = currentAlphabet->nextWord ;
+	
+	while (currentWord){
+			cout << currentWord->word <<" : "<<currentWord->meaning << "\n" ;
+			currentWord = currentWord->nextWord ;
+	}
+}
+
 };
+
 
 int main() {
     // Create a dictionary
     Dictionary dictionary;
-
+	Stack st ;
     
     dictionary.insertWordInDictionary("Zebra","Ye chuttu he") ;
     dictionary.insertWordInDictionary("Zebra","Ye chuttu he") ;
@@ -275,7 +352,12 @@ int main() {
 	dictionary.searchForWord("apple") ;
 	dictionary.deletionInWord("apple") ;
     // Display the dictionary
-    dictionary.displayDictionary();
+    dictionary.displayDictionary(st) ;
+    cout <<"\n\n" ;
+    cout << "Displaying Elements At Stack" <<"\n" ;
+    st.displayStack() ;
+    
+    dictionary.displayThroughRecursion(dictionary.head) ;
 
     return 0;
 }
