@@ -21,7 +21,7 @@ struct AlphabetNode {
 // Class to represent the dictionary
 class Dictionary {
 private:
-    AlphabetNode* head; // Pointer to the head of the dictionary
+    AlphabetNode* head; // Pointer to the head of the dictionary - > Will be null at start
 
 public:
     // Constructor to initialize the dictionary
@@ -31,7 +31,7 @@ public:
     }
 
     // Function to insert a word into the dictionary
-    void insertWord(string word, string meaning) {
+    void insertWordInDictionary(string word, string meaning) {
         // Convert the word to lowercase for case-insensitive comparison
         transform(word.begin(),word.end(),word.begin(),::tolower); //Converting word to lower Case
 
@@ -264,15 +264,15 @@ int main() {
     Dictionary dictionary;
 
     
-    dictionary.insertWord("Zebra","Ye chuttu he") ;
-    dictionary.insertWord("Zebra","Ye chuttu he") ;
-    dictionary.insertWord("age","19.5 he");
-    dictionary.insertWord("banana", "hamza khan kela");
-    dictionary.insertWord("cat", "aksa..r");
-    dictionary.insertWord("dog", "barking");
-    dictionary.insertWord("apple", "Ye Muje pxnd nhi");
-    dictionary.insertWord("age", "Ye Muje pxnd nhi");
-	dictionary.insertWord("ace", "Ye Muje pxnd nhi");    
+    dictionary.insertWordInDictionary("Zebra","Ye chuttu he") ;
+    dictionary.insertWordInDictionary("Zebra","Ye chuttu he") ;
+    dictionary.insertWordInDictionary("age","19.5 he");
+    dictionary.insertWordInDictionary("banana", "hamza khan kela");
+    dictionary.insertWordInDictionary("cat", "aksa..r");
+    dictionary.insertWordInDictionary("dog", "barking");
+    dictionary.insertWordInDictionary("apple", "Ye Muje pxnd nhi");
+    dictionary.insertWordInDictionary("age", "Ye Muje pxnd nhi");
+	dictionary.insertWordInDictionary("ace", "Ye Muje pxnd nhi");    
 	dictionary.searchForWord("apple") ;
 	dictionary.deletionInWord("apple") ;
     // Display the dictionary
