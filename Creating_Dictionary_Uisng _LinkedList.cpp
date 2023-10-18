@@ -154,6 +154,9 @@ public:
 	            currentWord = currentWord->nextWord;
 	        }
 	    }
+	    while (!isStackEmpty()) {
+            pop();
+        }
 }
 };
 
@@ -453,6 +456,7 @@ int main() {
         cout << "-----------------------------------------------------------------" << endl;
         cout << "Enter your choice: ";
         cin >> choice;
+        
 		cout<<"\n\n";
         // Perform operations based on user choice
         switch (choice) {
@@ -489,7 +493,7 @@ int main() {
             case 5: {
             	cout << "Displaying Words & Their Meanings Push At Stack" << endl;
                 st.displayStack(sl);
-                cin.ignore();  
+                cin.ignore();
                 break;
             }
             case 6: {
@@ -505,15 +509,14 @@ int main() {
                 cin.ignore() ;  
                 getline(cin, meaning) ;
                 sl.insertInSingleLinkedList(word, meaning);
-                cin.ignore();  
+             
                 break ;
             }
             case 8: {
                 string word;
                 cout << "Input word to search: ";
                 cin >> word;
-                sl.searchInLinkedList(word);
-                cin.ignore();  
+                sl.searchInLinkedList(word); 
                 break;
             }
             case 9: {
@@ -521,13 +524,13 @@ int main() {
                 cout << "Input word to delete: ";
                 cin >> word;
                 sl.deletionInlinkedList(word) ;
-                cin.ignore();  
+                
                 break;
             }
             case 10: {
                 cout << "Displaying Words & Thier Meanings in Singly LinkedList" << endl;
                 sl.displayLinkedList();
-                cin.ignore();  
+                
                 break;
             }
             case 11: {
