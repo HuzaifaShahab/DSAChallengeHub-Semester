@@ -298,7 +298,7 @@ void insertWordIntoAlphabet(AlphabetNode* currentAlphabet, string word, string m
 void displayDictionary(Stack & st) {
    	
     AlphabetNode* currentAlphabet = head;
-
+	cout <<"\n\n" ;
     while (currentAlphabet) {
         cout << "Words starting with '" << currentAlphabet->alphabet << "':\n";
 
@@ -448,12 +448,12 @@ int main() {
         cout << "7 . Insert Words & Thier Meanings in Single Linked List"  << endl;
         cout << "8 . Search Words & Thier Meanings in Single Linked List" << endl;
         cout << "9 . Delete Words & Thier Meanings in Single Linked List" << endl;
-        cout << "10. Display Words & Thier Meanings in Single Linked List" << endl;
+        cout << "10. show   Words & Thier Meanings in Single Linked List" << endl;
         cout << "11. Exit" << endl;
         cout << "-----------------------------------------------------------------" << endl;
         cout << "Enter your choice: ";
         cin >> choice;
-
+		cout<<"\n\n";
         // Perform operations based on user choice
         switch (choice) {
             case 1: {
@@ -483,11 +483,13 @@ int main() {
             case 4: {
                 cout << "Displaying Dictionary In Alphabetical Order :" << endl;
                 dictionary.displayDictionary(st);
+                cin.ignore();  
                 break;
             }
             case 5: {
             	cout << "Displaying Words & Their Meanings Push At Stack" << endl;
                 st.displayStack(sl);
+                cin.ignore();  
                 break;
             }
             case 6: {
@@ -503,6 +505,7 @@ int main() {
                 cin.ignore() ;  
                 getline(cin, meaning) ;
                 sl.insertInSingleLinkedList(word, meaning);
+                cin.ignore();  
                 break ;
             }
             case 8: {
@@ -510,6 +513,7 @@ int main() {
                 cout << "Input word to search: ";
                 cin >> word;
                 sl.searchInLinkedList(word);
+                cin.ignore();  
                 break;
             }
             case 9: {
@@ -517,11 +521,13 @@ int main() {
                 cout << "Input word to delete: ";
                 cin >> word;
                 sl.deletionInlinkedList(word) ;
+                cin.ignore();  
                 break;
             }
             case 10: {
                 cout << "Displaying Words & Thier Meanings in Singly LinkedList" << endl;
                 sl.displayLinkedList();
+                cin.ignore();  
                 break;
             }
             case 11: {
