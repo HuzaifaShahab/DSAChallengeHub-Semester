@@ -5,6 +5,15 @@
 
 using namespace std;
 
+int ascii = 220 ;
+char star = ascii ;
+// For Proper Segmentation's
+void stars(){
+	for (int i=0;i<60;i++)
+	cout<<star;
+	cout<<"\n\n";
+}
+
 // Structure to represent a word and its meaning
 struct WordNode {
     string word;
@@ -150,7 +159,7 @@ public:
 		else {
 	        while (currentWord) {
 	            cout << currentWord->word << ": " << currentWord->meaning << "\n";
-	             sl.insertInSingleLinkedList(currentWord->word, currentWord->meaning) ;
+	             sl.insertInSingleLinkedList(currentWord->word, currentWord->meaning);
 	            currentWord = currentWord->nextWord;
 	        }
 	    }
@@ -426,6 +435,45 @@ void displayThroughRecursion (AlphabetNode * currentAlphabet){
 	}
 }
 
+
+void searchTime(string word) {
+    AlphabetNode* currentAlphabet = head;
+    int totalJumps = 0;  // Counter to keep track of total jumps
+    int wordCount = 0;   // Counter to keep track of the number of words
+
+    while (currentAlphabet) {
+        WordNode* currentWord = currentAlphabet->nextWord;
+        while (currentWord) {
+            // Increment the counters for each word
+            wordCount++;
+
+            // Perform the search
+            WordNode* searchPtr = currentAlphabet->nextWord;
+            int jumps = 0;  // Counter to keep track of jumps for the current word
+
+            while (searchPtr && searchPtr->word != word) {
+                searchPtr = searchPtr->nextWord;
+                jumps++;
+            }
+
+            // Update the total jumps
+            totalJumps += jumps;
+
+            // Move to the next word
+            currentWord = currentWord->nextWord;
+        }
+
+        // Move to the next alphabet
+        currentAlphabet = currentAlphabet->nextAlphabet;
+    }
+
+    // Calculate the average search time
+    double averageSearchTime = static_cast<double>(totalJumps) / wordCount;
+
+    // Print or use the average search time as needed
+    std::cout << "Average Search Time: " << averageSearchTime << std::endl;
+}
+
 };
 
 int main() {
@@ -435,25 +483,26 @@ int main() {
     Stack st;
 
     int choice;
-
+	dictionary.searchTime("dog") ;
     do {
         // Display Menu
-        cout << setw(30) << "MAIN--MENU" << endl;
+        cout << setw(40) << "-> Digital-Dictionary <-" << endl;
         
-        cout << "----------------------------------------------------------------" << endl;
+        stars() ;
         cout << "1 . Insert Word & It's Meaning in the Dictionary" << endl;
         cout << "2 . Search for Word in the Dictionary" << endl;
         cout << "3 . Delete Word from Dictionary" << endl;
         cout << "4 . Display Whole Dictionary In Alphabetical Order" << endl;
         cout << "5 . Display All Words & Their Meanings Push At Stack" << endl;
-        cout << "6 . Display Words & Thier Meanings Through Recursion" << endl;
-        cout<<"--------------------------Question 2-------------------------------"<<endl;
+        cout << "6 . Display Words & Thier Meanings Through Recursion" << endl<<endl;
+        stars();
+        cout<<"--------------------Question 2---------------------"<<endl;
         cout << "7 . Insert Words & Thier Meanings in Single Linked List"  << endl;
         cout << "8 . Search Words & Thier Meanings in Single Linked List" << endl;
         cout << "9 . Delete Words & Thier Meanings in Single Linked List" << endl;
         cout << "10. show   Words & Thier Meanings in Single Linked List" << endl;
         cout << "11. Exit" << endl;
-        cout << "-----------------------------------------------------------------" << endl;
+        stars();
         cout << "Enter your choice: ";
         cin >> choice;
         
