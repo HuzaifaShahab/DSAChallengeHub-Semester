@@ -20,7 +20,7 @@ struct AlphabetNode {
 
 // Class to push the words & Meanings to Single Linked list class 
 class SingleNode {
-	private : 
+	public : 
 	SingleNode * Head = nullptr;
 	SingleNode * next ;
 	string word , meaning ;
@@ -43,18 +43,53 @@ class SingleNode {
 			SingleNode * currentNode = Head ;
 			while (currentNode){
 				if (currentNode->word == word){
-					cout << "Word is in the dictionary." << "\n" ;
+					cout << "Word & their meaning in a single linked list." << "\n" ;
 					return ;
 				}
 				currentNode = currentNode->next;
 				if (!currentNode){
-					cout << "Word is in the dictionary." << "\n" ;
+					cout << "Word & their meaning in a single linked list." << "\n" ;
 					return ;
 				}
 			}
-			cout << "Word is'nt in the dictionary." << "\n" ;	
+			cout << "Word & their meaning is'nt in the dictionary." << "\n" ;	
 		}
 		
+void deletionInlinkedList(string word) {
+    SingleNode* currentWord = Head;
+    SingleNode * toDelete ;
+
+    // Displaying warning
+    cout << "Are you sure you want to delete the word | " << word << " | from Dictionary? (yes/no): ";
+    char pick;
+    cin >> pick;
+
+    if (pick =='y'||pick=='Y') {
+        // Check if the word is found
+        if (!currentWord) {
+            cout <<"Word not found in the dictionary: " <<word<<"\n";
+            return ;
+        }
+        if (Head->word == word){
+        	toDelete = Head ;
+        	Head = currentWord->next ;
+        	delete toDelete ;
+        	return ;
+		}
+			 // Iterate through the linked list to find the word
+		    while (currentWord && currentWord->next->word != word) {
+		        currentWord = currentWord->next;
+		    }
+		    toDelete = currentWord->next ;
+		    currentWord->next = currentWord->next->next ;
+		      
+        // Check if the first node is the one to be deleted
+        cout << "Word '" << word << "' deleted successfully.\n";
+        delete (toDelete);
+    } else {
+        cout << "You have cancelled Deletion" << "\n";
+    }
+}
 		void displayLinkedList (){
 			cout << "Word & their meanings in a single linked list" <<"\n" ;
 			SingleNode * currentNode = Head ;
@@ -310,7 +345,6 @@ void searchForWord(string key) {
         cout << "Word : " <<currentWord->word<<" is'nt in the dictionary."<<"\n" ;
 }
 
-
 void deletionInWord(string word) {
     
 	transform(word.begin(),word.end(),word.begin(),::tolower); // Convert word to lowercase
@@ -383,8 +417,6 @@ void displayThroughRecursion (AlphabetNode * currentAlphabet){
 
 };
 
-
-
 int main() {
     // Create a dictionary
     Dictionary dictionary;
@@ -396,9 +428,11 @@ int main() {
     dictionary.insertWordInDictionary("dog", "barking");
     dictionary.insertWordInDictionary("apple", "Ye Muje pxnd nhi");
     dictionary.insertWordInDictionary("age", "Ye Muje pxnd nhi");
-	dictionary.insertWordInDictionary("ace", "Ye Muje pxnd nhi");    
+	dictionary.insertWordInDictionary("ace", "Ye Muje pxnd nhi");  
+	sl.deletionInlinkedList("dog") ;  
 	dictionary.searchForWord("apple") ;
 	dictionary.deletionInWord("apple") ;
+	sl.searchInLinkedList("word") ;
     // Display the dictionary
     dictionary.displayDictionary(st) ;
     cout <<"\n\n" ;
@@ -406,8 +440,9 @@ int main() {
     st.displayStack(sl) ;
     cout << "Words in single linked list" << endl ;
     sl.displayLinkedList() ;
+    
     cout << "------------------------------" << endl;
     dictionary.displayThroughRecursion(dictionary.head) ;
 
-    return 0;
+return 1;
 }
