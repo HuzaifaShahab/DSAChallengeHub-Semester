@@ -1,8 +1,7 @@
 #include <iostream>
 #include <cstring>
 #include <iomanip>
-#include <algorithm>  // Added for transform
-
+#include <algorithm>  // Added for transform for lowerCasing 
 using namespace std;
 
 int ascii = 220 ;
@@ -12,7 +11,7 @@ void stars(){
 	for (int i=0;i<60;i++)
 	cout<<star;
 	cout<<"\n\n";
-}
+}\
 
 // Structure to represent a word and its meaning
 struct WordNode {
@@ -51,6 +50,7 @@ class SingleNode {
 		
 		void searchInLinkedList (string word){
 			SingleNode * currentNode = Head ;
+			
 			while (currentNode){
 				if (currentNode->word == word){
 					cout << "Word & their meaning in a single linked list." << "\n" ;
@@ -64,6 +64,23 @@ class SingleNode {
 			}
 			cout << "Word & their meaning is'nt in the dictionary." << "\n" ;	
 		}
+		
+void searchTimeSinglyLL(string word) {
+
+	SingleNode * currentNode = Head ;
+    double wordCount=0;
+    double totalJumps=0;
+	while (currentNode && currentNode->word != word) {
+                wordCount++ ;
+                totalJumps++;
+                currentNode = currentNode->next ;
+        }
+
+    double averageSearchTime = (totalJumps) / wordCount;
+
+    cout<<"Average Search Time (Singly LinkedList): "<<averageSearchTime<<endl;
+}
+
 		
 void deletionInlinkedList(string word) {
     SingleNode* currentWord = Head;
@@ -169,8 +186,7 @@ public:
 }
 };
 
-
-// Class to represent the dictionary
+// Class to represent the Dictionary
 class Dictionary {
 public:
     AlphabetNode* head; // Pointer to the head of the dictionary -> Will be null at start
@@ -436,42 +452,26 @@ void displayThroughRecursion (AlphabetNode * currentAlphabet){
 }
 
 
-void searchTime(string word) {
+void searchTimeDictionary(string word) {
     AlphabetNode* currentAlphabet = head;
-    int totalJumps = 0;  // Counter to keep track of total jumps
-    int wordCount = 0;   // Counter to keep track of the number of words
+    double totalJumps = 0; 
+    double wordCount = 0 ;   
 
     while (currentAlphabet) {
-        WordNode* currentWord = currentAlphabet->nextWord;
-        while (currentWord) {
-            // Increment the counters for each word
-            wordCount++;
-
-            // Perform the search
-            WordNode* searchPtr = currentAlphabet->nextWord;
-            int jumps = 0;  // Counter to keep track of jumps for the current word
-
-            while (searchPtr && searchPtr->word != word) {
-                searchPtr = searchPtr->nextWord;
-                jumps++;
-            }
-
-            // Update the total jumps
-            totalJumps += jumps;
-
-            // Move to the next word
-            currentWord = currentWord->nextWord;
+        
+		WordNode* currentWord = currentAlphabet->nextWord;
+        
+	    while (currentWord && currentWord->word != word) {
+                currentWord = currentWord->nextWord;
+                wordCount++ ;
+                totalJumps++;
         }
-
-        // Move to the next alphabet
         currentAlphabet = currentAlphabet->nextAlphabet;
     }
 
-    // Calculate the average search time
-    double averageSearchTime = static_cast<double>(totalJumps) / wordCount;
+    double averageSearchTime = (totalJumps) / wordCount;
 
-    // Print or use the average search time as needed
-    std::cout << "Average Search Time: " << averageSearchTime << std::endl;
+    cout<<"Average Search Time (Digital Dictionary): "<<averageSearchTime<<endl;
 }
 
 };
@@ -483,7 +483,7 @@ int main() {
     Stack st;
 
     int choice;
-	dictionary.searchTime("dog") ;
+
     do {
         // Display Menu
         cout << setw(40) << "-> Digital-Dictionary <-" << endl;
@@ -501,7 +501,9 @@ int main() {
         cout << "8 . Search Words & Thier Meanings in Single Linked List" << endl;
         cout << "9 . Delete Words & Thier Meanings in Single Linked List" << endl;
         cout << "10. show   Words & Thier Meanings in Single Linked List" << endl;
-        cout << "11. Exit" << endl;
+        cout << "11. Search Time in Single Linked List" << endl;
+        cout << "12. Search Time in Digital Dictionary" << endl;
+        cout << "13. Exit" << endl;
         stars();
         cout << "Enter your choice: ";
         cin >> choice;
@@ -582,7 +584,25 @@ int main() {
                 
                 break;
             }
-            case 11: {
+             case 11: {
+                cout << "Search Time In Singly LinkedList" << endl;
+                string word;
+                cout << "Input word for search time: ";
+                cin >> word;
+               dictionary.searchTimeDictionary(word) ;
+                
+                break;
+            }
+             case 12: {
+                cout << "Search Time In Digital Dictionary" << endl;
+                string word;
+                cout << "Input word for search time: ";
+                cin >> word;
+                sl.searchTimeSinglyLL(word);
+                
+                break;
+            }
+            case 13: {
                 cout << "Exit" << endl;
                 break;
             }
@@ -590,6 +610,5 @@ int main() {
                 cout << "Invalid choice. Please enter a valid option." << endl;
         }
     } while (choice != 11);
-
-    return 0 ;
+    	return 0 ;
 }
