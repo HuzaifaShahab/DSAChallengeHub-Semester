@@ -39,6 +39,22 @@ class SingleNode {
 			Head = newNode ;
 		}
 		
+		void searchInLinkedList (string word){
+			SingleNode * currentNode = Head ;
+			while (currentNode){
+				if (currentNode->word == word){
+					cout << "Word is in the dictionary." << "\n" ;
+					return ;
+				}
+				currentNode = currentNode->next;
+				if (!currentNode){
+					cout << "Word is in the dictionary." << "\n" ;
+					return ;
+				}
+			}
+			cout << "Word is'nt in the dictionary." << "\n" ;	
+		}
+		
 		void displayLinkedList (){
 			cout << "Word & their meanings in a single linked list" <<"\n" ;
 			SingleNode * currentNode = Head ;
