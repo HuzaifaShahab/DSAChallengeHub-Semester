@@ -1,5 +1,6 @@
 #include <iostream>
 #include <cstring>
+#include <iomanip>
 #include <algorithm>  // Added for transform
 
 using namespace std;
@@ -90,9 +91,14 @@ void deletionInlinkedList(string word) {
         cout << "You have cancelled Deletion" << "\n";
     }
 }
-		void displayLinkedList (){
-			cout << "Word & their meanings in a single linked list" <<"\n" ;
+
+void displayLinkedList (){
 			SingleNode * currentNode = Head ;
+//				if (!Head) {
+//					cout << "No Words & Their Meanings Are There In Singly linkedlist"<<"\n";
+//					return ;
+//				}
+			cout << "Word & their meanings in a single linked list" <<"\n" ;
 			while (currentNode){
 				cout << currentNode->word <<" : " <<currentNode->meaning << "\n\n" ;
 				currentNode = currentNode->next ;
@@ -103,7 +109,6 @@ void deletionInlinkedList(string word) {
 class Stack {
 private:
     WordNode* top;
-
 public:
     Stack() : top(nullptr) {}
 
@@ -156,7 +161,7 @@ public:
 // Class to represent the dictionary
 class Dictionary {
 public:
-    AlphabetNode* head; // Pointer to the head of the dictionary - > Will be null at start
+    AlphabetNode* head; // Pointer to the head of the dictionary -> Will be null at start
     
     // Constructor to initialize the dictionary
     Dictionary() {
@@ -166,10 +171,10 @@ public:
     // Function to insert a word into the dictionary
     void insertWordInDictionary(string word, string meaning) {
         // Convert the word to lowercase for case using algorithm library
-        transform(word.begin(),word.end(),word.begin(),::tolower); //Converting word to lower Case
+        transform(word.begin(),word.end(),word.begin(),::tolower); // Converting word to lower Case
 
         char firstChar = word[0] ;
-        AlphabetNode* currentAlphabet = findCorrectAlphabet(firstChar); //Will find you the node to insert
+        AlphabetNode* currentAlphabet = findCorrectAlphabet(firstChar); // Will find you the node to insert
 
 
         // If the alphabet node doesn't exist, create a new one
@@ -212,7 +217,7 @@ public:
     }
 
     // Function to insert an alphabet node into the linked list of alphabets
-    void insertAlphabetNode(AlphabetNode* newAlphabet) {
+void insertAlphabetNode(AlphabetNode* newAlphabet) {
         if (!head || head->alphabet > newAlphabet->alphabet) {
             // Insert at the beginning of the list
             newAlphabet->nextAlphabet = head;
@@ -247,7 +252,6 @@ void insertWordIntoAlphabet(AlphabetNode* currentAlphabet, string word, string m
             heWord = current;
             break;
         }
-      
 	    current = current->nextWord;
     }
 
@@ -291,7 +295,7 @@ void insertWordIntoAlphabet(AlphabetNode* currentAlphabet, string word, string m
 }
 
   // Function to display the entire dictionary
-   void displayDictionary(Stack & st) {
+void displayDictionary(Stack & st) {
    	
     AlphabetNode* currentAlphabet = head;
 
@@ -299,7 +303,7 @@ void insertWordIntoAlphabet(AlphabetNode* currentAlphabet, string word, string m
         cout << "Words starting with '" << currentAlphabet->alphabet << "':\n";
 
         WordNode* currentWord = currentAlphabet->nextWord ;
-
+		
         while (currentWord) {
             cout << currentWord->word << ": " << currentWord->meaning << "\n";
 
@@ -357,6 +361,10 @@ void deletionInWord(string word) {
         cout << "The word with the first alphabet isn't in the Dictionary" << "\n" ;
         return;
     }
+    if(!currentAlphabet->nextWord) {
+    	cout << "Word not found in the Dictionary: " << word << "\n";
+    	return ;
+	}
 
     WordNode* currentWord = currentAlphabet->nextWord;
     WordNode* prevPosition = nullptr;
@@ -418,31 +426,112 @@ void displayThroughRecursion (AlphabetNode * currentAlphabet){
 };
 
 int main() {
-    // Create a dictionary
+    // Initialize your data structures and objects
     Dictionary dictionary;
-    SingleNode sl ;
-	Stack st ;
-    
-    dictionary.insertWordInDictionary("banana", "hamza khan kela");
-    dictionary.insertWordInDictionary("cat", "aksa..r");
-    dictionary.insertWordInDictionary("dog", "barking");
-    dictionary.insertWordInDictionary("apple", "Ye Muje pxnd nhi");
-    dictionary.insertWordInDictionary("age", "Ye Muje pxnd nhi");
-	dictionary.insertWordInDictionary("ace", "Ye Muje pxnd nhi");  
-	sl.deletionInlinkedList("dog") ;  
-	dictionary.searchForWord("apple") ;
-	dictionary.deletionInWord("apple") ;
-	sl.searchInLinkedList("word") ;
-    // Display the dictionary
-    dictionary.displayDictionary(st) ;
-    cout <<"\n\n" ;
-    cout << "Displaying Elements At Stack" <<"\n" ;
-    st.displayStack(sl) ;
-    cout << "Words in single linked list" << endl ;
-    sl.displayLinkedList() ;
-    
-    cout << "------------------------------" << endl;
-    dictionary.displayThroughRecursion(dictionary.head) ;
+    SingleNode sl;
+    Stack st;
 
-return 1;
+    int choice;
+
+    do {
+        // Display Menu
+        cout << setw(30) << "MAIN--MENU" << endl;
+        
+        cout << "----------------------------------------------------------------" << endl;
+        cout << "1 . Insert Word & It's Meaning in the Dictionary" << endl;
+        cout << "2 . Search for Word in the Dictionary" << endl;
+        cout << "3 . Delete Word from Dictionary" << endl;
+        cout << "4 . Display Whole Dictionary In Alphabetical Order" << endl;
+        cout << "5 . Display All Words & Their Meanings Push At Stack" << endl;
+        cout << "6 . Display Words & Thier Meanings Through Recursion" << endl;
+        cout<<"--------------------------Question 2-------------------------------"<<endl;
+        cout << "7 . Insert Words & Thier Meanings in Single Linked List"  << endl;
+        cout << "8 . Search Words & Thier Meanings in Single Linked List" << endl;
+        cout << "9 . Delete Words & Thier Meanings in Single Linked List" << endl;
+        cout << "10. Display Words & Thier Meanings in Single Linked List" << endl;
+        cout << "11. Exit" << endl;
+        cout << "-----------------------------------------------------------------" << endl;
+        cout << "Enter your choice: ";
+        cin >> choice;
+
+        // Perform operations based on user choice
+        switch (choice) {
+            case 1: {
+                string word, meaning;
+                cout << "Input word: ";
+                cin >> word;
+                cout << "Input meaning: ";
+                cin.ignore();  
+                getline(cin, meaning);
+                dictionary.insertWordInDictionary(word, meaning);
+                break;
+            }
+            case 2: {
+                string word;
+                cout << "Input word to search: ";
+                cin >> word;
+                dictionary.searchForWord(word);
+                break;
+            }
+            case 3: {
+                string word;
+                cout << "Input word to delete: ";
+                cin >> word;
+                dictionary.deletionInWord(word);
+                break;
+            }
+            case 4: {
+                cout << "Displaying Dictionary In Alphabetical Order :" << endl;
+                dictionary.displayDictionary(st);
+                break;
+            }
+            case 5: {
+            	cout << "Displaying Words & Their Meanings Push At Stack" << endl;
+                st.displayStack(sl);
+                break;
+            }
+            case 6: {
+            	cout << "Displaying Words & Thier Meanings Through Recursion" << endl;
+                dictionary.displayThroughRecursion(dictionary.head);
+                break;
+            }
+            case 7: {
+                string word, meaning;
+                cout << "Input word: " ;
+                cin >> word ;
+                cout << "Input meaning: " ;
+                cin.ignore() ;  
+                getline(cin, meaning) ;
+                sl.insertInSingleLinkedList(word, meaning);
+                break ;
+            }
+            case 8: {
+                string word;
+                cout << "Input word to search: ";
+                cin >> word;
+                sl.searchInLinkedList(word);
+                break;
+            }
+            case 9: {
+                string word;
+                cout << "Input word to delete: ";
+                cin >> word;
+                sl.deletionInlinkedList(word) ;
+                break;
+            }
+            case 10: {
+                cout << "Displaying Words & Thier Meanings in Singly LinkedList" << endl;
+                sl.displayLinkedList();
+                break;
+            }
+            case 11: {
+                cout << "Exit" << endl;
+                break;
+            }
+            default:
+                cout << "Invalid choice. Please enter a valid option." << endl;
+        }
+    } while (choice != 11);
+
+    return 0 ;
 }
