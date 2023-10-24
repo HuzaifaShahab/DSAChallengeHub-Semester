@@ -24,14 +24,13 @@ public:
     void push(int data)
     {
         Node* newNode = new Node(data);
-        newNode->data = data ;
         newNode->next = top;
  		top = newNode;
     }
  
     bool isStackEmpty()
     {
-        return top == nullptr; // Will return flag value either true or false
+        return top == nullptr ; // Will return flag value either true or false
     }
  
     int peek()
@@ -50,8 +49,8 @@ public:
             cout << "\nStack Is Empty" << endl;
             return ;
         }
-        else {
-            temp = top;
+        else {n m
+            temp  = top;
             top = top->next; // It will give address of top having next field
             delete(temp); // Will free the memory
         }
