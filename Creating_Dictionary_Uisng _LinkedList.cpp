@@ -11,7 +11,7 @@ void stars(){
 	for (int i=0;i<60;i++)
 	cout<<star;
 	cout<<"\n\n";
-}\
+}
 
 // Structure to represent a word and its meaning
 struct WordNode {
