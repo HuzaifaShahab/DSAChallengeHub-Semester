@@ -28,6 +28,10 @@ void addInHead (List*&Head,int data){
 	
 	List *newNode = new List(data) ;
 	temp->next = newNode ;
+	
+	
+	
+	
 	newNode -> next = Head ;
 	Head = newNode ; 
 }
@@ -64,20 +68,52 @@ void traverse (List * Head){
 	cout << " null"<<endl ;
 }
 
-void deletion (List*Head , int value){
-	List * temp , * toDelete ;
-	temp = Head ;
-	while (temp->next->data != value){
-		temp = temp->next ;
-	}
-	toDelete = temp->next ;
-	cout << temp->next->data <<"  Deleted Successfully...." << endl;
-	temp->next = temp->next->next ;
+void deletion(List*& Head, int value) {
+    if (Head == nullptr) {
+        cout << "List is empty. Deletion failed." << endl;
+        return;
+    }
 
+    List* temp = Head;
+    List* toDelete = nullptr;
 
-	delete toDelete ;
-	
+    if (temp->data == value) {
+        toDelete = Head;
+
+        if (Head->next == Head) {
+            // Only one element in the list, set Head to nullptr
+            Head = nullptr;
+        } else {
+            // Move Head to the next node
+            Head = Head->next;
+        }
+
+        // Update the last node's next to the new Head
+        List* lastNode = Head;
+        while (lastNode->next != toDelete)
+            lastNode = lastNode->next;
+        lastNode->next = Head;
+
+        cout << toDelete->data << " Deleted Successfully." << endl;
+        delete toDelete;
+        return;
+    }
+
+    // Find the node to delete and update the previous node's next pointer
+    while (temp->next != Head && temp->next->data != value) {
+        temp = temp->next;
+    }
+
+    if (temp->next == Head) {
+        cout << "Value not found in the list." << endl;
+    } else {
+        toDelete = temp->next;
+        temp->next = temp->next->next;
+        cout << toDelete->data << " Deleted Successfully." << endl;
+        delete toDelete;
+    }
 }
+
 int main (){
 	List * Head = nullptr ;
 	
@@ -88,6 +124,7 @@ int main (){
 	addInHead(Head,89) ;
 	addInHead(Head,97);
 	addInHead(Head,88);
-	deletion(Head,44) ;
+	addInHead(Head,97) ;
+	deletion(Head,97);
 	traverse (Head) ;
 }
