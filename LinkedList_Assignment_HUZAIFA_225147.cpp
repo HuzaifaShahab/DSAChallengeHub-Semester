@@ -1,8 +1,8 @@
-#include <iostream>
+ #include <iostream>
 using namespace std ;
 
 class node {
-private :
+public :
     int data ;
     node * next ;
 public : 
@@ -194,7 +194,7 @@ void traverseLinkedList (node * head) {
         temp = temp->next ;
     }
     cout<<" --> null" ;
-}
+}   
 
 // Code To find midpoint in a Linkedlist
 
@@ -231,7 +231,7 @@ node * mergeLinkedList(node*left , node*right){
 			else {
 				temp->next = right ;
 				temp = right ;
-				left = right->next ;
+				right = right->next ;
 			}
 	}
 
@@ -244,7 +244,7 @@ node * mergeLinkedList(node*left , node*right){
 	while (right != nullptr){
 		temp->next = right ;
 		temp = right ;
-		left = right->next ;
+		right = right->next ;
 	}
 		dummyNode = dummyNode->next ;
 	
@@ -268,12 +268,12 @@ node * mergeSort (node*&head){
 		
 //		Now by recursive calls going to sort Linked List
 
-	left = mergeSort(left) ;
-	right = mergeSort(right) ;
+	left = mergeSort(left);
+	right = mergeSort(right);
 	
-	node * final = mergeLinkedList (left,right) ;
-	return final ;
-}
+	node * final = mergeLinkedList (left,right);
+ return final ;
+
 
 int main () {
 
@@ -343,10 +343,9 @@ int main () {
         }
         else if (choice == 8){
         	sortingLinkedList(Head) ;
-//            node * head = mergeSort(Head) ;
-//            display(head);
-            cout << "Linked list Successfully Sorted through Merge Sort" << endl;
-        }
+            node * final = mergeSort(Head) ;
+            display(final);
+
         else if (choice == 9){
             cout << "\nPrinting the elements of the linked list" << endl;
             display(Head) ;
@@ -358,4 +357,5 @@ int main () {
     }while (choice!=10);
 
     return 0 ;
+}
 }
