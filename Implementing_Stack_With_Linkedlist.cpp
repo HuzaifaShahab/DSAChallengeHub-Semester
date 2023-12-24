@@ -35,9 +35,10 @@ public:
  
     int peek()
     {
-        if (isStackEmpty())
+        if (isStackEmpty()){
+		
         cout << "Stack is empty" <<endl;
-            return -1;
+            return -1;}
         else
             return top->data;
     }
@@ -49,7 +50,7 @@ public:
             cout << "\nStack Is Empty" << endl;
             return ;
         }
-        else {n m
+        else {
             temp  = top;
             top = top->next; // It will give address of top having next field
             delete(temp); // Will free the memory
